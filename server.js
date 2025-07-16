@@ -7,25 +7,27 @@ const prisma = new PrismaClient()
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 // caminhos para arquivos ejs
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
     res.render('index', { title: 'Home' });
 });
 
-app.get('/feed', async (req, res) => {
+app.get('/feed', (req, res) => {
     res.render('feed', { title: 'Feed' });
 });
 
-app.get('/login', async (req, res) => {
+app.get('/login', (req, res) => {
     res.render('login', { title: 'Login' });
 });
 
-app.get('/cadastro', async (req, res) => {
+app.get('/cadastro', (req, res) => {
     res.render('cadastro', { title: 'Cadastro' });
 });
 
