@@ -27,3 +27,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+let lastScrollTop = 0;
+const menu = document.getElementById('categorias'); // Certifique-se que o menu tem id="categorias"
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollTop > lastScrollTop) {
+        // Descendo
+        menu.classList.add('hidden'); // Adiciona a classe 'hidden' para sumir
+    } else {
+        // Subindo
+        menu.classList.remove('hidden'); // Remove a classe 'hidden' para aparecer
+    }
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Evita valores negativos
+});
