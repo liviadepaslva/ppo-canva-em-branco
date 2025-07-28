@@ -34,9 +34,10 @@ model Usuario {
 
 model Publicacao {
   id           Int       @id @default(autoincrement())
+  titulo       String
   conteudo     String    
   criadoEm     DateTime  @default(now())
-  atualizadoEm DateTime  @updatedAt
+  categoria     String?   
 
   autorId      Int
   autor        Usuario   @relation(fields: [autorId], references: [id])

@@ -130,9 +130,10 @@ exports.Prisma.UsuarioScalarFieldEnum = {
 
 exports.Prisma.PublicacaoScalarFieldEnum = {
   id: 'id',
+  titulo: 'titulo',
   conteudo: 'conteudo',
   criadoEm: 'criadoEm',
-  atualizadoEm: 'atualizadoEm',
+  categoria: 'categoria',
   autorId: 'autorId'
 };
 

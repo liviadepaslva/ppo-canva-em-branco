@@ -215,3 +215,55 @@ nav a .material-symbols-outlined {
 }
 
 
+/* formulário criar postagem */
+
+form#criar-postagem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+form#criar-postagem div {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+form#criar-postagem label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form#criar-postagem input,
+form#criar-postagem textarea,
+form#criar-postagem select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form#criar-postagem button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form#criar-postagem button:hover {
+    background-color: #0056b3;
+}

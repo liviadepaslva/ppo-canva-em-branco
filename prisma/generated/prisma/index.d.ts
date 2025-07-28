@@ -2716,25 +2716,28 @@ export namespace Prisma {
 
   export type PublicacaoMinAggregateOutputType = {
     id: number | null
+    titulo: string | null
     conteudo: string | null
     criadoEm: Date | null
-    atualizadoEm: Date | null
+    categoria: string | null
     autorId: number | null
   }
 
   export type PublicacaoMaxAggregateOutputType = {
     id: number | null
+    titulo: string | null
     conteudo: string | null
     criadoEm: Date | null
-    atualizadoEm: Date | null
+    categoria: string | null
     autorId: number | null
   }
 
   export type PublicacaoCountAggregateOutputType = {
     id: number
+    titulo: number
     conteudo: number
     criadoEm: number
-    atualizadoEm: number
+    categoria: number
     autorId: number
     _all: number
   }
@@ -2752,25 +2755,28 @@ export namespace Prisma {
 
   export type PublicacaoMinAggregateInputType = {
     id?: true
+    titulo?: true
     conteudo?: true
     criadoEm?: true
-    atualizadoEm?: true
+    categoria?: true
     autorId?: true
   }
 
   export type PublicacaoMaxAggregateInputType = {
     id?: true
+    titulo?: true
     conteudo?: true
     criadoEm?: true
-    atualizadoEm?: true
+    categoria?: true
     autorId?: true
   }
 
   export type PublicacaoCountAggregateInputType = {
     id?: true
+    titulo?: true
     conteudo?: true
     criadoEm?: true
-    atualizadoEm?: true
+    categoria?: true
     autorId?: true
     _all?: true
   }
@@ -2863,9 +2869,10 @@ export namespace Prisma {
 
   export type PublicacaoGroupByOutputType = {
     id: number
+    titulo: string
     conteudo: string
     criadoEm: Date
-    atualizadoEm: Date
+    categoria: string | null
     autorId: number
     _count: PublicacaoCountAggregateOutputType | null
     _avg: PublicacaoAvgAggregateOutputType | null
@@ -2890,9 +2897,10 @@ export namespace Prisma {
 
   export type PublicacaoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    titulo?: boolean
     conteudo?: boolean
     criadoEm?: boolean
-    atualizadoEm?: boolean
+    categoria?: boolean
     autorId?: boolean
     autor?: boolean | UsuarioDefaultArgs<ExtArgs>
     comentarios?: boolean | Publicacao$comentariosArgs<ExtArgs>
@@ -2903,31 +2911,34 @@ export namespace Prisma {
 
   export type PublicacaoSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    titulo?: boolean
     conteudo?: boolean
     criadoEm?: boolean
-    atualizadoEm?: boolean
+    categoria?: boolean
     autorId?: boolean
     autor?: boolean | UsuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["publicacao"]>
 
   export type PublicacaoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    titulo?: boolean
     conteudo?: boolean
     criadoEm?: boolean
-    atualizadoEm?: boolean
+    categoria?: boolean
     autorId?: boolean
     autor?: boolean | UsuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["publicacao"]>
 
   export type PublicacaoSelectScalar = {
     id?: boolean
+    titulo?: boolean
     conteudo?: boolean
     criadoEm?: boolean
-    atualizadoEm?: boolean
+    categoria?: boolean
     autorId?: boolean
   }
 
-  export type PublicacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "conteudo" | "criadoEm" | "atualizadoEm" | "autorId", ExtArgs["result"]["publicacao"]>
+  export type PublicacaoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "titulo" | "conteudo" | "criadoEm" | "categoria" | "autorId", ExtArgs["result"]["publicacao"]>
   export type PublicacaoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     autor?: boolean | UsuarioDefaultArgs<ExtArgs>
     comentarios?: boolean | Publicacao$comentariosArgs<ExtArgs>
@@ -2952,9 +2963,10 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      titulo: string
       conteudo: string
       criadoEm: Date
-      atualizadoEm: Date
+      categoria: string | null
       autorId: number
     }, ExtArgs["result"]["publicacao"]>
     composites: {}
@@ -3384,9 +3396,10 @@ export namespace Prisma {
    */
   interface PublicacaoFieldRefs {
     readonly id: FieldRef<"Publicacao", 'Int'>
+    readonly titulo: FieldRef<"Publicacao", 'String'>
     readonly conteudo: FieldRef<"Publicacao", 'String'>
     readonly criadoEm: FieldRef<"Publicacao", 'DateTime'>
-    readonly atualizadoEm: FieldRef<"Publicacao", 'DateTime'>
+    readonly categoria: FieldRef<"Publicacao", 'String'>
     readonly autorId: FieldRef<"Publicacao", 'Int'>
   }
     
@@ -8285,9 +8298,10 @@ export namespace Prisma {
 
   export const PublicacaoScalarFieldEnum: {
     id: 'id',
+    titulo: 'titulo',
     conteudo: 'conteudo',
     criadoEm: 'criadoEm',
-    atualizadoEm: 'atualizadoEm',
+    categoria: 'categoria',
     autorId: 'autorId'
   };
 
@@ -8477,9 +8491,10 @@ export namespace Prisma {
     OR?: PublicacaoWhereInput[]
     NOT?: PublicacaoWhereInput | PublicacaoWhereInput[]
     id?: IntFilter<"Publicacao"> | number
+    titulo?: StringFilter<"Publicacao"> | string
     conteudo?: StringFilter<"Publicacao"> | string
     criadoEm?: DateTimeFilter<"Publicacao"> | Date | string
-    atualizadoEm?: DateTimeFilter<"Publicacao"> | Date | string
+    categoria?: StringNullableFilter<"Publicacao"> | string | null
     autorId?: IntFilter<"Publicacao"> | number
     autor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     comentarios?: ComentarioListRelationFilter
@@ -8489,9 +8504,10 @@ export namespace Prisma {
 
   export type PublicacaoOrderByWithRelationInput = {
     id?: SortOrder
+    titulo?: SortOrder
     conteudo?: SortOrder
     criadoEm?: SortOrder
-    atualizadoEm?: SortOrder
+    categoria?: SortOrderInput | SortOrder
     autorId?: SortOrder
     autor?: UsuarioOrderByWithRelationInput
     comentarios?: ComentarioOrderByRelationAggregateInput
@@ -8504,9 +8520,10 @@ export namespace Prisma {
     AND?: PublicacaoWhereInput | PublicacaoWhereInput[]
     OR?: PublicacaoWhereInput[]
     NOT?: PublicacaoWhereInput | PublicacaoWhereInput[]
+    titulo?: StringFilter<"Publicacao"> | string
     conteudo?: StringFilter<"Publicacao"> | string
     criadoEm?: DateTimeFilter<"Publicacao"> | Date | string
-    atualizadoEm?: DateTimeFilter<"Publicacao"> | Date | string
+    categoria?: StringNullableFilter<"Publicacao"> | string | null
     autorId?: IntFilter<"Publicacao"> | number
     autor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     comentarios?: ComentarioListRelationFilter
@@ -8516,9 +8533,10 @@ export namespace Prisma {
 
   export type PublicacaoOrderByWithAggregationInput = {
     id?: SortOrder
+    titulo?: SortOrder
     conteudo?: SortOrder
     criadoEm?: SortOrder
-    atualizadoEm?: SortOrder
+    categoria?: SortOrderInput | SortOrder
     autorId?: SortOrder
     _count?: PublicacaoCountOrderByAggregateInput
     _avg?: PublicacaoAvgOrderByAggregateInput
@@ -8532,9 +8550,10 @@ export namespace Prisma {
     OR?: PublicacaoScalarWhereWithAggregatesInput[]
     NOT?: PublicacaoScalarWhereWithAggregatesInput | PublicacaoScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Publicacao"> | number
+    titulo?: StringWithAggregatesFilter<"Publicacao"> | string
     conteudo?: StringWithAggregatesFilter<"Publicacao"> | string
     criadoEm?: DateTimeWithAggregatesFilter<"Publicacao"> | Date | string
-    atualizadoEm?: DateTimeWithAggregatesFilter<"Publicacao"> | Date | string
+    categoria?: StringNullableWithAggregatesFilter<"Publicacao"> | string | null
     autorId?: IntWithAggregatesFilter<"Publicacao"> | number
   }
 
@@ -8862,9 +8881,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoCreateInput = {
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     autor: UsuarioCreateNestedOneWithoutPublicacoesInput
     comentarios?: ComentarioCreateNestedManyWithoutPublicacaoInput
     curtidas?: CurtidaCreateNestedManyWithoutPublicacaoInput
@@ -8873,9 +8893,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedCreateInput = {
     id?: number
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     autorId: number
     comentarios?: ComentarioUncheckedCreateNestedManyWithoutPublicacaoInput
     curtidas?: CurtidaUncheckedCreateNestedManyWithoutPublicacaoInput
@@ -8883,9 +8904,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoUpdateInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     autor?: UsuarioUpdateOneRequiredWithoutPublicacoesNestedInput
     comentarios?: ComentarioUpdateManyWithoutPublicacaoNestedInput
     curtidas?: CurtidaUpdateManyWithoutPublicacaoNestedInput
@@ -8894,9 +8916,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     autorId?: IntFieldUpdateOperationsInput | number
     comentarios?: ComentarioUncheckedUpdateManyWithoutPublicacaoNestedInput
     curtidas?: CurtidaUncheckedUpdateManyWithoutPublicacaoNestedInput
@@ -8905,23 +8928,26 @@ export namespace Prisma {
 
   export type PublicacaoCreateManyInput = {
     id?: number
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     autorId: number
   }
 
   export type PublicacaoUpdateManyMutationInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PublicacaoUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     autorId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -9336,9 +9362,10 @@ export namespace Prisma {
 
   export type PublicacaoCountOrderByAggregateInput = {
     id?: SortOrder
+    titulo?: SortOrder
     conteudo?: SortOrder
     criadoEm?: SortOrder
-    atualizadoEm?: SortOrder
+    categoria?: SortOrder
     autorId?: SortOrder
   }
 
@@ -9349,17 +9376,19 @@ export namespace Prisma {
 
   export type PublicacaoMaxOrderByAggregateInput = {
     id?: SortOrder
+    titulo?: SortOrder
     conteudo?: SortOrder
     criadoEm?: SortOrder
-    atualizadoEm?: SortOrder
+    categoria?: SortOrder
     autorId?: SortOrder
   }
 
   export type PublicacaoMinOrderByAggregateInput = {
     id?: SortOrder
+    titulo?: SortOrder
     conteudo?: SortOrder
     criadoEm?: SortOrder
-    atualizadoEm?: SortOrder
+    categoria?: SortOrder
     autorId?: SortOrder
   }
 
@@ -10186,9 +10215,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoCreateWithoutAutorInput = {
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     comentarios?: ComentarioCreateNestedManyWithoutPublicacaoInput
     curtidas?: CurtidaCreateNestedManyWithoutPublicacaoInput
     imagens?: ImagemCreateNestedManyWithoutPublicacaoInput
@@ -10196,9 +10226,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedCreateWithoutAutorInput = {
     id?: number
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     comentarios?: ComentarioUncheckedCreateNestedManyWithoutPublicacaoInput
     curtidas?: CurtidaUncheckedCreateNestedManyWithoutPublicacaoInput
     imagens?: ImagemUncheckedCreateNestedManyWithoutPublicacaoInput
@@ -10314,9 +10345,10 @@ export namespace Prisma {
     OR?: PublicacaoScalarWhereInput[]
     NOT?: PublicacaoScalarWhereInput | PublicacaoScalarWhereInput[]
     id?: IntFilter<"Publicacao"> | number
+    titulo?: StringFilter<"Publicacao"> | string
     conteudo?: StringFilter<"Publicacao"> | string
     criadoEm?: DateTimeFilter<"Publicacao"> | Date | string
-    atualizadoEm?: DateTimeFilter<"Publicacao"> | Date | string
+    categoria?: StringNullableFilter<"Publicacao"> | string | null
     autorId?: IntFilter<"Publicacao"> | number
   }
 
@@ -10615,9 +10647,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoCreateWithoutImagensInput = {
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     autor: UsuarioCreateNestedOneWithoutPublicacoesInput
     comentarios?: ComentarioCreateNestedManyWithoutPublicacaoInput
     curtidas?: CurtidaCreateNestedManyWithoutPublicacaoInput
@@ -10625,9 +10658,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedCreateWithoutImagensInput = {
     id?: number
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     autorId: number
     comentarios?: ComentarioUncheckedCreateNestedManyWithoutPublicacaoInput
     curtidas?: CurtidaUncheckedCreateNestedManyWithoutPublicacaoInput
@@ -10650,9 +10684,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoUpdateWithoutImagensInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     autor?: UsuarioUpdateOneRequiredWithoutPublicacoesNestedInput
     comentarios?: ComentarioUpdateManyWithoutPublicacaoNestedInput
     curtidas?: CurtidaUpdateManyWithoutPublicacaoNestedInput
@@ -10660,9 +10695,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedUpdateWithoutImagensInput = {
     id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     autorId?: IntFieldUpdateOperationsInput | number
     comentarios?: ComentarioUncheckedUpdateManyWithoutPublicacaoNestedInput
     curtidas?: CurtidaUncheckedUpdateManyWithoutPublicacaoNestedInput
@@ -10703,9 +10739,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoCreateWithoutComentariosInput = {
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     autor: UsuarioCreateNestedOneWithoutPublicacoesInput
     curtidas?: CurtidaCreateNestedManyWithoutPublicacaoInput
     imagens?: ImagemCreateNestedManyWithoutPublicacaoInput
@@ -10713,9 +10750,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedCreateWithoutComentariosInput = {
     id?: number
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     autorId: number
     curtidas?: CurtidaUncheckedCreateNestedManyWithoutPublicacaoInput
     imagens?: ImagemUncheckedCreateNestedManyWithoutPublicacaoInput
@@ -10778,9 +10816,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoUpdateWithoutComentariosInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     autor?: UsuarioUpdateOneRequiredWithoutPublicacoesNestedInput
     curtidas?: CurtidaUpdateManyWithoutPublicacaoNestedInput
     imagens?: ImagemUpdateManyWithoutPublicacaoNestedInput
@@ -10788,9 +10827,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedUpdateWithoutComentariosInput = {
     id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     autorId?: IntFieldUpdateOperationsInput | number
     curtidas?: CurtidaUncheckedUpdateManyWithoutPublicacaoNestedInput
     imagens?: ImagemUncheckedUpdateManyWithoutPublicacaoNestedInput
@@ -10831,9 +10871,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoCreateWithoutCurtidasInput = {
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     autor: UsuarioCreateNestedOneWithoutPublicacoesInput
     comentarios?: ComentarioCreateNestedManyWithoutPublicacaoInput
     imagens?: ImagemCreateNestedManyWithoutPublicacaoInput
@@ -10841,9 +10882,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedCreateWithoutCurtidasInput = {
     id?: number
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
     autorId: number
     comentarios?: ComentarioUncheckedCreateNestedManyWithoutPublicacaoInput
     imagens?: ImagemUncheckedCreateNestedManyWithoutPublicacaoInput
@@ -10906,9 +10948,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoUpdateWithoutCurtidasInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     autor?: UsuarioUpdateOneRequiredWithoutPublicacoesNestedInput
     comentarios?: ComentarioUpdateManyWithoutPublicacaoNestedInput
     imagens?: ImagemUpdateManyWithoutPublicacaoNestedInput
@@ -10916,9 +10959,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedUpdateWithoutCurtidasInput = {
     id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     autorId?: IntFieldUpdateOperationsInput | number
     comentarios?: ComentarioUncheckedUpdateManyWithoutPublicacaoNestedInput
     imagens?: ImagemUncheckedUpdateManyWithoutPublicacaoNestedInput
@@ -11074,9 +11118,10 @@ export namespace Prisma {
 
   export type PublicacaoCreateManyAutorInput = {
     id?: number
+    titulo: string
     conteudo: string
     criadoEm?: Date | string
-    atualizadoEm?: Date | string
+    categoria?: string | null
   }
 
   export type ComentarioCreateManyAutorInput = {
@@ -11103,9 +11148,10 @@ export namespace Prisma {
   }
 
   export type PublicacaoUpdateWithoutAutorInput = {
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     comentarios?: ComentarioUpdateManyWithoutPublicacaoNestedInput
     curtidas?: CurtidaUpdateManyWithoutPublicacaoNestedInput
     imagens?: ImagemUpdateManyWithoutPublicacaoNestedInput
@@ -11113,9 +11159,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedUpdateWithoutAutorInput = {
     id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
     comentarios?: ComentarioUncheckedUpdateManyWithoutPublicacaoNestedInput
     curtidas?: CurtidaUncheckedUpdateManyWithoutPublicacaoNestedInput
     imagens?: ImagemUncheckedUpdateManyWithoutPublicacaoNestedInput
@@ -11123,9 +11170,10 @@ export namespace Prisma {
 
   export type PublicacaoUncheckedUpdateManyWithoutAutorInput = {
     id?: IntFieldUpdateOperationsInput | number
+    titulo?: StringFieldUpdateOperationsInput | string
     conteudo?: StringFieldUpdateOperationsInput | string
     criadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
-    atualizadoEm?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoria?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ComentarioUpdateWithoutAutorInput = {

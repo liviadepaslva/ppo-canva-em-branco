@@ -1,1 +1,45 @@
-<p>Welcome to the feed page!</p>
+<div class="feed-container">
+    <% publicacoes.forEach(publicacao => { %>
+        <div class="post-card">
+            <img src="<%= publicacao.imagens[0].url %>" alt="<%= publicacao.titulo %>">
+
+            <div class="post-card-content">
+                <h3><%= publicacao.titulo %></h3>
+
+                <% if (publicacao.conteudo) { %>
+                    <p><%= publicacao.conteudo %></p>
+                <% } %>
+            </div>
+        </div>
+    <% }); %>
+</div>
+<style>
+    .feed-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .post-card {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        z-index: -1;
+    }
+
+    .post-card img {
+        width: 100%;
+        height: auto;
+    }
+
+    .post-card-content {
+        padding: 15px;
+    }
+
+    .post-card h3 {
+        margin-top: 0;
+    }
+
+</style>

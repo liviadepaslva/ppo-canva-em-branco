@@ -8,6 +8,7 @@
     <script defer src='/js/main.js'></script> 
 </head>
 <body>
+    <%= mensagem %>
     <h1>Login</h1>
     <form action="/login" method="POST">
         <div>
@@ -15,8 +16,8 @@
             <input type="email" id="email" name="email" required>
         </div>
         <div>
-            <label for="password">Senha:</label>
-            <input type="password" id="password" name="password" required>
+            <label for="senha">Senha:</label>
+            <input type="senha" id="senha" name="senha" required>
         </div>
         <button type="submit">Entrar</button>
     </form>

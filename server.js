@@ -25,71 +25,192 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/feed', (req, res) => {
-    res.render('feed', { 
-      title: 'Feed',
-      layout: 'layouts/main', 
-    });
+app.get('/feed', async (req, res) => {
+  const feedPublicacoes = await prisma.publicacao.findMany({
+    include: {
+      imagens: true,
+      autor: true,
+      comentarios: true,
+      curtidas: true
+    }
+  });
+  console.log(feedPublicacoes);
+
+  res.render('feed', { 
+    title: 'Feed',
+    layout: 'layouts/main', 
+    publicacoes: feedPublicacoes
+  });
 });
+
+// página de login
 
 app.get('/login', (req, res) => {
     res.render('login', { 
       title: 'Login',
-      layout: false
-    });
-});
-
-// cadastro
-
-app.get('/cadastro', (req, res) => {
-    res.render('cadastro', { 
-      title: 'Cadastro' , 
       layout: false,
       mensagem: ''
-     });
+    });
 });
 
-app.post('/cadastro', async (req, res) => {
-  const { username, email, password } = req.body;
-
+app.post('/login', async (req, res) => {
+  const { email, senha } = req.body;
   try {
-    // Validate input and save user to the database using Prisma
-    if (!username || !email || !password) {
-      return res.render('cadastro', { title: 'Cadastro', mensagem: 'Por favor, preencha todos os campos.' });
+    if (!email || !senha) {
+      return res.render('login', { 
+        title: 'Login',
+        layout: false,
+        mensagem: 'Por favor, preencha todos os campos.' 
+      });
     }
-
-    // Aqui você pode adicionar o código para salvar o usuário no banco de dados usando Prisma
-    // await prisma.user.create({ data: { username, email, password } });
-
-    res.render('cadastro', { 
-      title: 'Cadastro', 
-      layout: false,
-      mensagem: 'Cadastro realizado com sucesso!' 
+    // Verifica se o usuário existe
+    const usuario = await prisma.usuario.findUnique({
+      where: { email: email }
     });
+    if (!usuario) {
+      return res.render('login', { 
+        title: 'Login',
+        layout: false,
+        mensagem: 'E-mail não cadastrado.' 
+      });
+    }
+    // Verifica se a senha está correta
+    if (usuario.senhaHash !== senha) {
+      return res.render('login', { 
+        title: 'Login',
+        layout: false,
+        mensagem: 'Senha incorreta.' 
+      });
+    }
+    // Se tudo estiver correto, redireciona para o feed
+    res.redirect('/feed');
+
   } catch (error) {
     console.error(error);
-    res.render('cadastro', { 
-      title: 'Cadastro', 
+    res.render('login', { 
+      title: 'Login',
       layout: false,
-      mensagem: 'Erro ao cadastrar usuário.' 
+      mensagem: 'Erro ao realizar login.' 
     });
   }
 });
 
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-  if (email == 'liviadepaslva@gmail.com' && password == '123456') 
-    {
-      // Login bem-sucedido
-      res.redirect('/feed');
-    } else {
-      // Login falhou
-      res.render('login', { 
-        title: 'Login', 
+// página de cadastro
+
+app.get('/cadastro', (req, res) => {
+  res.render('cadastro', { 
+    title: 'Cadastro', 
+    layout: false,
+    mensagem: ''
+  });
+});
+
+app.post('/cadastro', async (req, res) => {
+  const { nomeUsuario, email, confirmar_email, senha, confirmar_senha } = req.body;
+  try {
+    // validação dos campos
+    if (!nomeUsuario || !email || !confirmar_email || !senha || !confirmar_senha) {
+      return res.render('cadastro', { 
+        title: 'Cadastro', 
         layout: false,
-        mensagem: 'Email ou senha inválidos.' });
+        mensagem: 'Por favor, preencha todos os campos.' 
+      });
+    }
+    // confirmaração de email e senha
+    else if (email !== confirmar_email) {
+      return res.render('cadastro', { 
+        title: 'Cadastro', 
+        layout: false,
+        mensagem: 'Os emails inseridos não são iguais.' 
+      });
+    }
+    else if (senha !== confirmar_senha) {
+      return res.render('cadastro', { 
+        title: 'Cadastro', 
+        layout: false,
+        mensagem: 'As senhas inseridas não são iguais.' 
+      });
+    }
+    // Verifica se o email já está cadastrado
+    const usuárioExistente = await prisma.usuario.findUnique({
+      where: { 
+        email: email,
+        nomeUsuario: nomeUsuario
+       }
+    });
+
+    if (usuárioExistente) {
+      return res.render('cadastro', { 
+        title: 'Cadastro', 
+        layout: false,
+        mensagem: 'Email já cadastrado.' 
+      });
+    }
+    else {
+      // Cria o usuario no banco de dados
+      await prisma.usuario.create({
+        data: {
+          nomeUsuario: nomeUsuario,
+          email: email,
+          senhaHash: senha
+        }
+      });
+
+      res.render('cadastro', { 
+        title: 'Cadastro', 
+        layout: false,
+        mensagem: 'Cadastro realizado com sucesso!' 
+      });
+  }} catch (error) {
+      console.error(error);
+      res.render('cadastro', { 
+        title: 'Cadastro', 
+        layout: false,
+        mensagem: 'Erro ao cadastrar usuario.' 
+      });
     }
 });
+
+// página de criação de postagem
+
+app.post('/feed', async (req, res) => {
+  const { titulo, conteudo, imagem, categoria } = req.body;
+  try {
+    // Validação dos campos
+    if (!titulo || (!conteudo || !imagem) || !categoria) {
+      console.warn('Campos obrigatórios não preenchidos.');
+      return res.redirect('/feed');
+    }
+
+    // Criação da postagem no banco de dados
+    await prisma.publicacao.create({
+      data: {
+        titulo: titulo,
+        conteudo: conteudo,
+        imagens: {
+          create: {
+            url: imagem,
+            descricao: '',
+            ordem: 1
+          }
+        },
+        categoria: categoria,
+        autor: {
+          connect: { id: 1 } // Conectando ao usuário com ID 1, você pode ajustar isso conforme necessário
+        }
+      }
+    });
+
+    console.log('Postagem criada com sucesso!'); // Redireciona para o feed após a criação da postagem
+  } catch (error) {
+    console.error(error);
+  }
+  res.redirect('/feed');
+});
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
