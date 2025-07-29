@@ -183,7 +183,7 @@ nav a .material-symbols-outlined {
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
     margin-bottom: 1rem;
-    z-index: 2;
+    z-index: 1;
 }
 
 .post-card:hover {
@@ -232,6 +232,7 @@ form#criar-postagem {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+    z-index: 1000;
 }
 
 form#criar-postagem div {

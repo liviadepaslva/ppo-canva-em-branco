@@ -2,11 +2,39 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
+const multer = require('multer');
 const { PrismaClient } = require('./prisma/generated/prisma');
 const prisma = new PrismaClient()
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads/') // Make sure this directory exists
+  },
+  filename: function (req, file, cb) {
+    // Generate unique filename
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ 
+  storage: storage,
+  fileFilter: function (req, file, cb) {
+    // Only allow image files
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed!'), false);
+    }
+  },
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB limit
+  }
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -25,6 +53,13 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/teste-css', (req, res) => {
+  res.render('teste-css', { 
+    title: 'Teste CSS',
+    layout: 'layouts/main'
+  });
+});
+
 app.get('/feed', async (req, res) => {
   const feedPublicacoes = await prisma.publicacao.findMany({
     include: {
@@ -34,8 +69,10 @@ app.get('/feed', async (req, res) => {
       curtidas: true
     }
   });
-  console.log(feedPublicacoes);
-
+  
+  // Debug: Check what data is being fetched
+  console.log('Feed publications:', JSON.stringify(feedPublicacoes, null, 2));
+  
   res.render('feed', { 
     title: 'Feed',
     layout: 'layouts/main', 
@@ -172,36 +209,42 @@ app.post('/cadastro', async (req, res) => {
 });
 
 // página de criação de postagem
-
-app.post('/feed', async (req, res) => {
-  const { titulo, conteudo, imagem, categoria } = req.body;
+app.post('/feed', upload.single('imagem'), async (req, res) => {
+  const { titulo, conteudo, categoria } = req.body;
   try {
     // Validação dos campos
-    if (!titulo || (!conteudo || !imagem) || !categoria) {
+    if (!titulo || (!conteudo && !req.file) || !categoria) {
       console.warn('Campos obrigatórios não preenchidos.');
       return res.redirect('/feed');
     }
 
     // Criação da postagem no banco de dados
-    await prisma.publicacao.create({
+    const novaPublicacao = await prisma.publicacao.create({
       data: {
         titulo: titulo,
-        conteudo: conteudo,
-        imagens: {
-          create: {
-            url: imagem,
-            descricao: '',
-            ordem: 1
-          }
-        },
+        conteudo: conteudo || '',
         categoria: categoria,
         autor: {
-          connect: { id: 1 } // Conectando ao usuário com ID 1, você pode ajustar isso conforme necessário
+          connect: { id: 1 }
         }
       }
     });
 
-    console.log('Postagem criada com sucesso!'); // Redireciona para o feed após a criação da postagem
+    // Se houver uma imagem (arquivo), criar o registro na tabela imagens
+    if (req.file) {
+      await prisma.imagem.create({
+        data: {
+          url: `/uploads/${req.file.filename}`, // Store relative path
+          descricao: titulo,
+          ordem: 1,
+          publicacao: {
+            connect: { id: novaPublicacao.id }
+          }
+        }
+      });
+    }
+
+    console.log('Postagem criada com sucesso!');
   } catch (error) {
     console.error(error);
   }

@@ -1,3 +1,4 @@
+<!-- filepath: c:\Users\livia\OneDrive\Documentos\canva-em-branco\ppo-canva-em-branco\views\partials\nav.ejs -->
 <nav>
     <div>
         <img src="imgs/logo.jpeg" alt="Logo" class="logo">
@@ -21,7 +22,8 @@
             
 </nav>
 
-<form id="criar-postagem" action="/feed" method="post">
+<form id="criar-postagem" action="/feed" method="post" enctype="multipart/form-data">
+    <button id="btn-fechar-criar-post">X</button>
     <div>
         <label for="titulo">Título:</label>
         <input type="text" id="titulo" name="titulo" required>
