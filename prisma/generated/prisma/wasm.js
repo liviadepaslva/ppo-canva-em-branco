@@ -123,16 +123,15 @@ exports.Prisma.UsuarioScalarFieldEnum = {
   email: 'email',
   senhaHash: 'senhaHash',
   biografia: 'biografia',
-  urlFotoPerfil: 'urlFotoPerfil',
-  criadoEm: 'criadoEm',
-  atualizadoEm: 'atualizadoEm'
+  urlFotoPerfil: 'urlFotoPerfil'
 };
 
-exports.Prisma.PublicacaoScalarFieldEnum = {
+exports.Prisma.PostsScalarFieldEnum = {
   id: 'id',
   titulo: 'titulo',
   conteudo: 'conteudo',
   criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm',
   categoria: 'categoria',
   autorId: 'autorId'
 };
@@ -140,10 +139,8 @@ exports.Prisma.PublicacaoScalarFieldEnum = {
 exports.Prisma.ImagemScalarFieldEnum = {
   id: 'id',
   url: 'url',
-  descricao: 'descricao',
   ordem: 'ordem',
-  criadoEm: 'criadoEm',
-  publicacaoId: 'publicacaoId'
+  postId: 'postId'
 };
 
 exports.Prisma.ComentarioScalarFieldEnum = {
@@ -151,20 +148,15 @@ exports.Prisma.ComentarioScalarFieldEnum = {
   conteudo: 'conteudo',
   criadoEm: 'criadoEm',
   autorId: 'autorId',
-  publicacaoId: 'publicacaoId'
+  postId: 'postId',
+  respostaDeId: 'respostaDeId'
 };
 
 exports.Prisma.CurtidaScalarFieldEnum = {
   id: 'id',
   criadoEm: 'criadoEm',
   usuarioId: 'usuarioId',
-  publicacaoId: 'publicacaoId'
-};
-
-exports.Prisma.SeguirScalarFieldEnum = {
-  seguidorId: 'seguidorId',
-  seguindoId: 'seguindoId',
-  criadoEm: 'criadoEm'
+  postId: 'postId'
 };
 
 exports.Prisma.SortOrder = {
@@ -180,11 +172,10 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
-  Publicacao: 'Publicacao',
+  Posts: 'Posts',
   Imagem: 'Imagem',
   Comentario: 'Comentario',
-  Curtida: 'Curtida',
-  Seguir: 'Seguir'
+  Curtida: 'Curtida'
 };
 
 /**

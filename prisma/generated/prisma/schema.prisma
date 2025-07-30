@@ -15,32 +15,28 @@ generator client {
 }
 
 model Usuario {
-  id            Int      @id @default(autoincrement())
-  nomeUsuario   String   @unique
-  email         String   @unique
+  id            Int     @id @default(autoincrement())
+  nomeUsuario   String  @unique
+  email         String  @unique
   senhaHash     String
   biografia     String?
   urlFotoPerfil String?
-  criadoEm      DateTime @default(now())
-  atualizadoEm  DateTime @updatedAt
 
-  publicacoes Publicacao[]
+  posts       Posts[]
   comentarios Comentario[]
   curtidas    Curtida[]
-
-  seguindo   Seguir[] @relation("UsuarioSeguindo")
-  seguidores Seguir[] @relation("UsuarioSeguidores")
 }
 
-model Publicacao {
-  id        Int      @id @default(autoincrement())
-  titulo    String
-  conteudo  String
-  criadoEm  DateTime @default(now())
-  categoria String?
+model Posts {
+  id           Int       @id @default(autoincrement())
+  titulo       String
+  conteudo     String
+  criadoEm     DateTime  @default(now())
+  atualizadoEm DateTime? @updatedAt
+  categoria    String?
 
   autorId Int
-  autor   Usuario @relation(fields: [autorId], references: [id])
+  autor   Usuario @relation(fields: [autorId], references: [id], onDelete: Cascade)
 
   comentarios Comentario[]
   curtidas    Curtida[]
@@ -48,15 +44,12 @@ model Publicacao {
 }
 
 model Imagem {
-  id        Int      @id @default(autoincrement())
-  url       String
-  descricao String? // descrição para o alt
-  ordem     Int?
-  criadoEm  DateTime @default(now())
+  id    Int    @id @default(autoincrement())
+  url   String
+  ordem Int?
 
-  // relacionamento p/ imagens e publicação
-  publicacaoId Int
-  publicacao   Publicacao @relation(fields: [publicacaoId], references: [id])
+  postId Int
+  post   Posts @relation(fields: [postId], references: [id])
 }
 
 model Comentario {
@@ -67,8 +60,12 @@ model Comentario {
   autorId Int
   autor   Usuario @relation(fields: [autorId], references: [id])
 
-  publicacaoId Int
-  publicacao   Publicacao @relation(fields: [publicacaoId], references: [id])
+  postId Int
+  post   Posts @relation(fields: [postId], references: [id])
+
+  respostas    Comentario[] @relation("ComentarioRespostas")
+  respostaDe   Comentario?  @relation("ComentarioRespostas", fields: [respostaDeId], references: [id], onDelete: Cascade)
+  respostaDeId Int? // ID do comentário que esse está se referindo
 }
 
 model Curtida {
@@ -78,19 +75,8 @@ model Curtida {
   usuarioId Int
   usuario   Usuario @relation(fields: [usuarioId], references: [id])
 
-  publicacaoId Int
-  publicacao   Publicacao @relation(fields: [publicacaoId], references: [id])
+  postId Int
+  post   Posts @relation(fields: [postId], references: [id])
 
-  @@unique([usuarioId, publicacaoId])
-}
-
-model Seguir {
-  seguidorId Int
-  seguindoId Int
-  criadoEm   DateTime @default(now())
-
-  seguidor Usuario @relation("UsuarioSeguindo", fields: [seguidorId], references: [id])
-  seguindo Usuario @relation("UsuarioSeguidores", fields: [seguindoId], references: [id])
-
-  @@id([seguidorId, seguindoId])
+  @@unique([usuarioId, postId])
 }

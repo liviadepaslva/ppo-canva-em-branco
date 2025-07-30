@@ -8,6 +8,10 @@ const prisma = new PrismaClient()
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const userRoutes = require('./userRoutes');
+
+app.use(express.json());
+app.use('/', userRoutes);
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
