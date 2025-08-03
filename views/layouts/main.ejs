@@ -6,13 +6,10 @@
     <title><%- title %></title>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="/js/main.js" defer></script>
 </head>
-<body>
-    <%- include('../partials/header.ejs') %>
-    <%- include('../partials/nav.ejs') %>
-    <%- include('../partials/categorias.ejs') %>
-    <div id="conteudo-pag">
-        <%- body %>
-    </div>
+<body class="light">                                
+    <%- include('../partials/topo-pesquisa.ejs') %>
+    <%- include('../partials/nav-bar.ejs') %>
 </body>
 </html>    

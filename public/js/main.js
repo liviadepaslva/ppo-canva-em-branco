@@ -1,4 +1,15 @@
+// mostrar dados do perfil - topo da pagina
 
+document.getElementById('mostrar-dados-perfil').addEventListener('click', () => {
+  const dadosPerfil = document.getElementById('dados-perfil');
+
+  dadosPerfil.classList.toggle('mostrar');
+  // if (dadosPerfil.classList.contains('mostrar')) {
+  //   dadosPerfil.classList.remove('mostrar');
+  // } else {
+  //   dadosPerfil.classList.add('mostrar');
+  // }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   const botoes = document.querySelectorAll('.nav-btn');
@@ -52,7 +63,7 @@ criarPostToggle.addEventListener('click', () => {
     criarPostForm.classList.toggle('hidden');
 });
 
-const fecharFormsPost = document-getElementById('btn-fechar-criar-post');
+const fecharFormsPost = document.getElementById('btn-fechar-criar-post');
 
 fecharFormsPost.addEventListener('click', () => {
     criarPostForm.classList.add('hidden');

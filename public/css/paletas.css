@@ -1,0 +1,14 @@
+body.light {
+    --cor-base: #f7f4ed;
+    --cor-texto: #0c0c16;
+    --cor-borda: #0c0c16;
+    --cor-primaria: #6666ff;
+    --cor-secundaria: #b8baff;
+    --cor-terciaria: #c9e8ff;
+    --segunda-base: #c9e8ff;
+}
+
+body.dark {
+    --cor-base: #121212;
+    --cor-texto: #e0e0e0;
+}
