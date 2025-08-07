@@ -1,19 +1,25 @@
 <div class="feed-container">
-    <% publicacoes.forEach(publicacao => { %>
-        <div class="post-card">
-            <% if (publicacao.imagens && publicacao.imagens.length > 0) { %>
-                <img src="<%= publicacao.imagens[0].url %>" alt="<%= publicacao.titulo %>">
-            <% } else { %>
-                <div class="no-image-placeholder">No Image</div>
-            <% } %>
-
-            <div class="post-card-content">
-                <h3><%= publicacao.titulo %></h3>
-
-                <% if (publicacao.conteudo) { %>
-                    <p><%= publicacao.conteudo %></p>
+    <% if (posts && posts.length > 0) { %>
+        <% posts.forEach(post => { %>
+            <div class="post-card">
+                <% if (post.imagens && post.imagens.length > 0) { %>
+                    <img src="<%= post.imagens[0].url %>" alt="<%= post.titulo %>">
+                <% } else { %>
+                    <div class="no-image-placeholder">No Image</div>
                 <% } %>
+
+                <div class="post-card-content">
+                    <h3><%= post.titulo %></h3>
+
+                    <% if (post.conteudo) { %>
+                        <p><%= post.conteudo %></p>
+                    <% } %>
+                </div>
             </div>
+        <% }); %>
+    <% } else { %>
+        <div class="no-posts">
+            <p>Nenhuma postagem encontrada. Seja o primeiro a postar!</p>
         </div>
-    <% }); %>
+    <% } %>
 </div>

@@ -52,6 +52,21 @@ app.get('/cadastro', (req, res) => {
     });
 });
 
+app.get('/feed', (req, res) => {
+    res.render('feed', { 
+        title: 'Feed',
+        layout: 'layouts/main',
+        posts: [] // Inicialmente vazio, será preenchido pelo controller
+    });
+});
+
+app.get('/criar-post', (req, res) => {
+    res.render('criar-post', {
+        title: 'Criar Postagem',
+        layout: 'layouts/main'
+    });
+});
+
 // rotas
 app.use('/', userRoutes);
 app.use('/', postRoutes);

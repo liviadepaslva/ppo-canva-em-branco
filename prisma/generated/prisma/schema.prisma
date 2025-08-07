@@ -1,82 +1,82 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma"
+}
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/prisma"
-}
-
 model Usuario {
-  id            Int     @id @default(autoincrement())
-  nomeUsuario   String  @unique
-  email         String  @unique
-  senhaHash     String
-  biografia     String?
-  urlFotoPerfil String?
+  id          Int      @id @default(autoincrement())
+  nomeUsuario String   @unique
+  email       String   @unique
+  senhaHash   String
+  criadoEm    DateTime @default(now())
 
-  posts       Posts[]
+  // Relations
+  posts       Post[]
   comentarios Comentario[]
   curtidas    Curtida[]
+
+  @@map("usuarios")
 }
 
-model Posts {
-  id           Int       @id @default(autoincrement())
-  titulo       String
-  conteudo     String
-  criadoEm     DateTime  @default(now())
-  atualizadoEm DateTime? @updatedAt
-  categoria    String?
+model Post {
+  id        Int      @id @default(autoincrement())
+  titulo    String
+  conteudo  String?
+  categoria String
+  criadoEm  DateTime @default(now())
+  autorId   Int
 
-  autorId Int
-  autor   Usuario @relation(fields: [autorId], references: [id], onDelete: Cascade)
-
+  // Relations
+  autor       Usuario      @relation(fields: [autorId], references: [id])
+  imagens     Imagem[]
   comentarios Comentario[]
   curtidas    Curtida[]
-  imagens     Imagem[]
+
+  @@map("posts")
 }
 
 model Imagem {
-  id    Int    @id @default(autoincrement())
-  url   String
-  ordem Int?
+  id        Int     @id @default(autoincrement())
+  url       String
+  descricao String?
+  ordem     Int     @default(1)
+  postId    Int
 
-  postId Int
-  post   Posts @relation(fields: [postId], references: [id])
+  // Relations
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@map("imagens")
 }
 
 model Comentario {
   id       Int      @id @default(autoincrement())
   conteudo String
   criadoEm DateTime @default(now())
+  autorId  Int
+  postId   Int
 
-  autorId Int
-  autor   Usuario @relation(fields: [autorId], references: [id])
+  // Relations
+  autor Usuario @relation(fields: [autorId], references: [id])
+  post  Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
 
-  postId Int
-  post   Posts @relation(fields: [postId], references: [id])
-
-  respostas    Comentario[] @relation("ComentarioRespostas")
-  respostaDe   Comentario?  @relation("ComentarioRespostas", fields: [respostaDeId], references: [id], onDelete: Cascade)
-  respostaDeId Int? // ID do comentário que esse está se referindo
+  @@map("comentarios")
 }
 
 model Curtida {
-  id       Int      @id @default(autoincrement())
-  criadoEm DateTime @default(now())
+  id      Int @id @default(autoincrement())
+  autorId Int
+  postId  Int
 
-  usuarioId Int
-  usuario   Usuario @relation(fields: [usuarioId], references: [id])
+  // Relations
+  autor Usuario @relation(fields: [autorId], references: [id])
+  post  Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
 
-  postId Int
-  post   Posts @relation(fields: [postId], references: [id])
-
-  @@unique([usuarioId, postId])
+  // Prevent duplicate likes
+  @@unique([autorId, postId])
+  @@map("curtidas")
 }

@@ -15,7 +15,7 @@ const criarPostagem = async (req, res) => {
             return res.redirect('/feed');
         }
 
-        // cria uma postagem no banco de dados
+        // cria uma postagem no banco de dados - KEEP: prisma.post
         const post = await prisma.post.create({
             data: {
                 titulo,
@@ -34,7 +34,7 @@ const criarPostagem = async (req, res) => {
                     url: `/uploads/${req.file.filename}`,
                     descricao: titulo,
                     ordem: 1,
-                    publicacao: {
+                    post: {  // FIXED: Changed from 'posts' to 'post'
                         connect: { id: post.id }
                     }
                 }
@@ -50,21 +50,23 @@ const criarPostagem = async (req, res) => {
 
 const mostrarFeed = async (req, res) => {
     try {
-        const feedPublicacoes = await prisma.publicacao.findMany({
+        // FIXED: Changed from prisma.posts to prisma.post
+        const feedPosts = await prisma.post.findMany({
             include: {
                 imagens: true,
                 autor: true,
                 comentarios: true,
                 curtidas: true
+                // REMOVED: titulo (it's a field, not a relation)
             }
         });
         
-        console.log('Feed publications:', JSON.stringify(feedPublicacoes, null, 2));
+        console.log('Postagens do feed:', JSON.stringify(feedPosts, null, 2));
         
         res.render('feed', { 
             title: 'Feed',
             layout: 'layouts/main', 
-            publicacoes: feedPublicacoes
+            posts: feedPosts  // FIXED: Changed from 'Posts' to 'posts'
         });
     } catch (error) {
         console.error('Error loading feed:', error);

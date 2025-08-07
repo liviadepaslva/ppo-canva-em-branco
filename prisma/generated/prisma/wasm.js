@@ -122,23 +122,22 @@ exports.Prisma.UsuarioScalarFieldEnum = {
   nomeUsuario: 'nomeUsuario',
   email: 'email',
   senhaHash: 'senhaHash',
-  biografia: 'biografia',
-  urlFotoPerfil: 'urlFotoPerfil'
+  criadoEm: 'criadoEm'
 };
 
-exports.Prisma.PostsScalarFieldEnum = {
+exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   titulo: 'titulo',
   conteudo: 'conteudo',
-  criadoEm: 'criadoEm',
-  atualizadoEm: 'atualizadoEm',
   categoria: 'categoria',
+  criadoEm: 'criadoEm',
   autorId: 'autorId'
 };
 
 exports.Prisma.ImagemScalarFieldEnum = {
   id: 'id',
   url: 'url',
+  descricao: 'descricao',
   ordem: 'ordem',
   postId: 'postId'
 };
@@ -148,14 +147,12 @@ exports.Prisma.ComentarioScalarFieldEnum = {
   conteudo: 'conteudo',
   criadoEm: 'criadoEm',
   autorId: 'autorId',
-  postId: 'postId',
-  respostaDeId: 'respostaDeId'
+  postId: 'postId'
 };
 
 exports.Prisma.CurtidaScalarFieldEnum = {
   id: 'id',
-  criadoEm: 'criadoEm',
-  usuarioId: 'usuarioId',
+  autorId: 'autorId',
   postId: 'postId'
 };
 
@@ -172,7 +169,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
-  Posts: 'Posts',
+  Post: 'Post',
   Imagem: 'Imagem',
   Comentario: 'Comentario',
   Curtida: 'Curtida'

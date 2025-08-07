@@ -1,0 +1,24 @@
+<form id="criar-postagem" action="/feed" method="post" enctype="multipart/form-data">
+    <button id="btn-fechar-criar-post">X</button>
+    <div>
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" required>
+    </div>
+    <div>
+        <label for="conteudo">Conteúdo:</label>
+        <textarea id="conteudo" name="conteudo"></textarea>
+    </div>
+    <div>
+        <label for="imagem">Imagem:</label>
+        <input type="file" id="imagem" name="imagem" accept="image/*">
+    </div>
+    <div>
+        <label for="categoria">Categoria:</label>
+        <select id="categoria" name="categoria" required>
+            <option value="pintura">Pintura</option>
+            <option value="poema">Poema</option>
+            <option value="fotografia">Fotografia</option>
+        </select>
+    </div>
+    <button type="submit">Criar Postagem</button>
+</form>
