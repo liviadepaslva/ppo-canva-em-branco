@@ -1,3 +1,4 @@
+// prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
   output   = "./generated/prisma"
@@ -9,21 +10,21 @@ datasource db {
 }
 
 model Usuario {
-  id         Int      @id @default(autoincrement())
-  nomeUsuario String  @unique
-  email      String   @unique
-  senhaHash  String
-  criadoEm   DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  nomeUsuario String   @unique
+  email       String   @unique
+  senhaHash   String
+  criadoEm    DateTime @default(now())
   
   // Relations
-  posts      Post[]
+  publicacoes Publicacao[]
   comentarios Comentario[]
-  curtidas   Curtida[]
+  curtidas    Curtida[]
   
   @@map("usuarios")
 }
 
-model Post {
+model Publicacao {
   id        Int      @id @default(autoincrement())
   titulo    String
   conteudo  String?
@@ -32,51 +33,51 @@ model Post {
   autorId   Int
   
   // Relations
-  autor       Usuario      @relation(fields: [autorId], references: [id])
+  autor       Usuario      @relation(fields: [autorId], references: [id], onDelete: Cascade)
   imagens     Imagem[]
   comentarios Comentario[]
   curtidas    Curtida[]
   
-  @@map("posts")
+  @@map("publicacoes")
 }
 
 model Imagem {
-  id      Int    @id @default(autoincrement())
-  url     String
-  descricao String?
-  ordem   Int    @default(1)
-  postId  Int
+  id           Int    @id @default(autoincrement())
+  url          String
+  descricao    String?
+  ordem        Int    @default(1)
+  publicacaoId Int
   
   // Relations
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  publicacao Publicacao @relation(fields: [publicacaoId], references: [id], onDelete: Cascade)
   
   @@map("imagens")
 }
 
 model Comentario {
-  id      Int      @id @default(autoincrement())
-  conteudo String
-  criadoEm DateTime @default(now())
-  autorId Int
-  postId  Int
+  id           Int      @id @default(autoincrement())
+  conteudo     String
+  criadoEm     DateTime @default(now())
+  autorId      Int
+  publicacaoId Int
   
   // Relations
-  autor Usuario @relation(fields: [autorId], references: [id])
-  post  Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  autor      Usuario     @relation(fields: [autorId], references: [id], onDelete: Cascade)
+  publicacao Publicacao  @relation(fields: [publicacaoId], references: [id], onDelete: Cascade)
   
   @@map("comentarios")
 }
 
 model Curtida {
-  id      Int @id @default(autoincrement())
-  autorId Int
-  postId  Int
+  id           Int @id @default(autoincrement())
+  autorId      Int
+  publicacaoId Int
   
   // Relations
-  autor Usuario @relation(fields: [autorId], references: [id])
-  post  Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  autor      Usuario     @relation(fields: [autorId], references: [id], onDelete: Cascade)
+  publicacao Publicacao  @relation(fields: [publicacaoId], references: [id], onDelete: Cascade)
   
   // Prevent duplicate likes
-  @@unique([autorId, postId])
+  @@unique([autorId, publicacaoId])
   @@map("curtidas")
 }

@@ -1,7 +1,6 @@
-
-
-/* barra de pesquisa e dados do perfil */
-
+/* ---------------------------
+   Cabeçalho e barra de pesquisa
+--------------------------- */
 header {
     position: fixed;
     top: 0;
@@ -55,8 +54,9 @@ form.barra-pesquisar button#btn-pesquisar:hover {
     background-color: var(--cor-terciaria);
 }
 
-/* parte mostrando dados do perfil */
-
+/* ---------------------------
+   Dados do perfil
+--------------------------- */
 div#perfil {
     position: relative;
     display: flex;
@@ -79,10 +79,8 @@ div#perfil button#mostrar-dados-perfil {
     cursor: pointer;
     display: flex;
     align-items: center;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    transition: background-color 0.3s;
 }
 
 div#perfil button#mostrar-dados-perfil > span {
@@ -91,10 +89,8 @@ div#perfil button#mostrar-dados-perfil > span {
 }
 
 div#perfil button#mostrar-dados-perfil:hover {
-    background-color: var(--cor-secundaria); /* light blueviolet */
+    background-color: var(--cor-secundaria);
 }
-
-/* parte mostrando nome e email */
 
 div#perfil div#dados-perfil {
     color: var(--cor-texto);
@@ -132,7 +128,7 @@ div#dados-perfil > img.avatar {
 div#dados-perfil > div {
     display: flex;
     flex-direction: column;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
 div#dados-perfil > div > button#btn-sair {
@@ -148,4 +144,44 @@ div#dados-perfil > div > button#btn-sair {
 
 div#dados-perfil > div > button#btn-sair:hover {
     background-color: var(--cor-secundaria);
+}
+
+/* ---------------------------
+   Responsividade do header e perfil
+--------------------------- */
+@media (max-width: 768px) {
+    header {
+        padding: 0.5rem 1rem;
+        height: auto;
+        gap: 0.5rem;
+    }
+
+    header form.barra-pesquisar {
+        width: 100%;
+    }
+
+    form.barra-pesquisar input#barra-pesquisar,
+    form.barra-pesquisar button#btn-pesquisar {
+        height: 6dvh;
+        font-size: 0.9rem;
+    }
+
+    form.barra-pesquisar button#btn-pesquisar {
+        width: 6dvh;
+    }
+
+    div#perfil {
+        justify-content: flex-end;
+    }
+
+    div#perfil > a > img.avatar {
+        height: 40px;
+        width: 40px;
+    }
+
+    div#dados-perfil > img.avatar {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
 }

@@ -8,7 +8,9 @@
     <script defer src='/js/main.js'></script> 
 </head>
 <body>
-    <%= mensagem %>
+    <% if (mensagem) { %>
+        <p class="mensagem"><%= mensagem %></p>
+    <% } %>
     <h1>Login</h1>
     <form action="/login" method="POST">
         <div>
@@ -17,9 +19,11 @@
         </div>
         <div>
             <label for="senha">Senha:</label>
-            <input type="senha" id="senha" name="senha" required>
+            <input type="password" id="senha" name="senha" required>
         </div>
         <button type="submit">Entrar</button>
     </form>
+    <p><a href="/cadastro">Não tem conta? Cadastre-se</a></p>
+    <p><a href="/">Voltar ao início</a></p>
 </body>
 </html>

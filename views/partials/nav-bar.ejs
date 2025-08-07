@@ -1,48 +1,62 @@
-<!-- filepath: c:\Users\livia\OneDrive\Documentos\canva-em-branco\ppo-canva-em-branco\views\partials\nav.ejs -->
+<!-- Navigation Bar -->
 <nav>
-    
-    <img src="imgs/logo.png" alt="Logo" class="logo">
-    <a href="/feed" class="item">
+    <img src="/imgs/logo.png" alt="Logo" class="logo">
+    <a href="/feed" class="item" aria-label="Página inicial">
         <span class="material-symbols-outlined">home</span>
     </a>
-    <a href="#" class="item">
+    <a href="#" class="item" aria-label="Explorar">
         <span class="material-symbols-outlined">explore</span>
     </a>
-    <a href="/criar-post" class="item">
+    <button id="btn-criar-postagem" class="item" aria-label="Criar Postagem">
         <span class="material-symbols-outlined">add_box</span>
-    </a>
-    <a href="#" class="item">
+    </button>
+    <a href="#" class="item" aria-label="Notificações">
         <span class="material-symbols-outlined">developer_guide</span>
     </a>
-    
-            
-    <a href="#" class="item">
+    <a href="#" class="item" aria-label="Configurações">
         <span class="material-symbols-outlined">settings</span>
     </a>
-            
 </nav>
 
-<!-- <form id="criar-postagem" action="/feed" method="post" enctype="multipart/form-data">
-    <button id="btn-fechar-criar-post">X</button>
-    <div>
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo" required>
+<!-- Overlay for form -->
+<div id="form-overlay" class="form-overlay"></div>
+
+<!-- Create post form -->
+<form id="criar-postagem" class="form-criar-postagem" action="/feed" method="post" enctype="multipart/form-data">
+    <button type="button" id="btn-fechar-criar-post" class="btn-fechar" aria-label="Fechar">&times;</button>
+    <h3>Criar Nova Postagem</h3>
+    
+    <div class="form-group">
+        <label for="titulo">Título *</label>
+        <input type="text" id="titulo" name="titulo" required placeholder="Digite o título da sua postagem">
     </div>
-    <div>
-        <label for="conteudo">Conteúdo:</label>
-        <textarea id="conteudo" name="conteudo"></textarea>
+    
+    <div class="form-group">
+        <label for="conteudo">Conteúdo</label>
+        <textarea id="conteudo" name="conteudo" placeholder="Descreva sua obra ou pensamento..." rows="4"></textarea>
     </div>
-    <div>
-        <label for="imagem">Imagem:</label>
+    
+    <div class="form-group">
+        <label for="imagem">Imagem</label>
         <input type="file" id="imagem" name="imagem" accept="image/*">
+        <small>Formatos aceitos: JPG, PNG, GIF (máx. 5MB)</small>
     </div>
-    <div>
-        <label for="categoria">Categoria:</label>
+    
+    <div class="form-group">
+        <label for="categoria">Categoria *</label>
         <select id="categoria" name="categoria" required>
+            <option value="">Selecione uma categoria</option>
             <option value="pintura">Pintura</option>
             <option value="poema">Poema</option>
             <option value="fotografia">Fotografia</option>
+            <option value="escultura">Escultura</option>
+            <option value="digital">Arte Digital</option>
+            <option value="outros">Outros</option>
         </select>
     </div>
-    <button type="submit">Criar Postagem</button>
-</form> -->
+    
+    <div class="form-buttons">
+        <button type="button" id="btn-cancelar" class="btn-secondary">Cancelar</button>
+        <button type="submit" class="btn-primary">Criar Postagem</button>
+    </div>
+</form>

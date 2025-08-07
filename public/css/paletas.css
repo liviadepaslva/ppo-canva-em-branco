@@ -1,14 +1,85 @@
+/* Color Palettes and Theme System */
+
+/* Default theme (light) */
+:root,
+body,
 body.light {
-    --cor-base: #f7f4ed;
+    --cor-base: #fdfdfb;
     --cor-texto: #0c0c16;
-    --cor-borda: #0c0c16;
+    --cor-borda: #e1e5e9;
     --cor-primaria: #6666ff;
     --cor-secundaria: #b8baff;
     --cor-terciaria: #c9e8ff;
-    --segunda-base: #c9e8ff;
+    --segunda-base: #f7f9fc;
+    
+    /* Additional semantic colors */
+    --cor-sucesso: #10b981;
+    --cor-aviso: #f59e0b;
+    --cor-erro: #ef4444;
+    --cor-info: #3b82f6;
+    
+    /* Background variations */
+    --cor-fundo-card: #ffffff;
+    --cor-fundo-hover: #f8fafc;
+    --cor-sombra: rgba(0, 0, 0, 0.1);
+    --cor-sombra-hover: rgba(0, 0, 0, 0.15);
+    
+    /* Text variations */
+    --cor-texto-secundario: #64748b;
+    --cor-texto-placeholder: #94a3b8;
 }
 
+/* Dark theme */
 body.dark {
-    --cor-base: #121212;
-    --cor-texto: #e0e0e0;
+    --cor-base: #0f172a;
+    --cor-texto: #f1f5f9;
+    --cor-borda: #334155;
+    --cor-primaria: #8b5cf6;
+    --cor-secundaria: #a78bfa;
+    --cor-terciaria: #c4b5fd;
+    --segunda-base: #1e293b;
+    
+    /* Additional semantic colors for dark mode */
+    --cor-sucesso: #059669;
+    --cor-aviso: #d97706;
+    --cor-erro: #dc2626;
+    --cor-info: #2563eb;
+    
+    /* Background variations for dark mode */
+    --cor-fundo-card: #1e293b;
+    --cor-fundo-hover: #334155;
+    --cor-sombra: rgba(0, 0, 0, 0.3);
+    --cor-sombra-hover: rgba(0, 0, 0, 0.4);
+    
+    /* Text variations for dark mode */
+    --cor-texto-secundario: #94a3b8;
+    --cor-texto-placeholder: #64748b;
+}
+
+/* Theme transition */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --cor-borda: #000000;
+        --cor-sombra: rgba(0, 0, 0, 0.3);
+    }
+    
+    body.dark {
+        --cor-borda: #ffffff;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

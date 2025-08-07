@@ -3,74 +3,131 @@ const prisma = new PrismaClient();
 
 const criarPostagem = async (req, res) => {
     const { titulo, conteudo, categoria } = req.body;
+    
     try {
-        // validação dos campos do formulário
+        // Check if user is authenticated
+        if (!req.session.isAuthenticated) {
+            console.log('User not authenticated, redirecting to login');
+            return res.redirect('/login');
+        }
+
+        console.log('Creating post with data:', { titulo, categoria, hasFile: !!req.file });
+        console.log('User ID from session:', req.session.userId);
+
+        // Validation
         if (!titulo || !categoria) {
-            console.warn('Campos obrigatórios não preenchidos');
-            return res.redirect('/feed');
+            console.warn('Required fields missing');
+            return res.redirect('/feed?error=missing_fields');
         }
 
         if (!conteudo && !req.file) {
-            console.warn('Insira um conteúdo ou uma imagem');
-            return res.redirect('/feed');
+            console.warn('No content or image provided');
+            return res.redirect('/feed?error=no_content');
         }
 
-        // cria uma postagem no banco de dados - KEEP: prisma.post
-        const post = await prisma.post.create({
+        // First, check if user exists
+        const user = await prisma.usuario.findUnique({
+            where: { id: req.session.userId }
+        });
+
+        if (!user) {
+            console.error('User not found in database');
+            return res.redirect('/login');
+        }
+
+        // Create post using session user ID
+        const post = await prisma.publicacao.create({
             data: {
                 titulo,
                 conteudo: conteudo || '',
                 categoria,
-                autor: {
-                    connect: { id: 1 }
-                }
+                autorId: req.session.userId // Use direct ID instead of connect
             }
         });
 
-        // se houver uma imagem, cria a entrada na tabela de imagens
+        console.log('Post created with ID:', post.id);
+
+        // Create image if uploaded
         if (req.file) {
             await prisma.imagem.create({
                 data: {
                     url: `/uploads/${req.file.filename}`,
                     descricao: titulo,
                     ordem: 1,
-                    post: {  // FIXED: Changed from 'posts' to 'post'
-                        connect: { id: post.id }
-                    }
+                    publicacaoId: post.id // Use direct ID instead of connect
                 }
             });
+            console.log('Image added to post');
         }
 
-        console.log('Postagem criada com sucesso!');
+        console.log('Post created successfully!');
+        res.redirect('/feed?success=post_created');
+
     } catch (error) {
-        console.error(error);
+        console.error('Error creating post:', error);
+        console.error('Error details:', error.message);
+        console.error('Error code:', error.code);
+        res.redirect('/feed?error=creation_failed');
     }
-    res.redirect('/feed');
 };
 
 const mostrarFeed = async (req, res) => {
     try {
-        // FIXED: Changed from prisma.posts to prisma.post
-        const feedPosts = await prisma.post.findMany({
+        console.log('Loading feed for user:', req.session.userId);
+        
+        // Check if user is authenticated
+        if (!req.session.isAuthenticated) {
+            console.log('User not authenticated, redirecting to login');
+            return res.redirect('/login');
+        }
+
+        // Test database connection first
+        await prisma.$connect();
+        console.log('Database connected successfully');
+
+        // Simple query first to test
+        const postCount = await prisma.publicacao.count();
+        console.log('Total posts in database:', postCount);
+
+        // Get feed posts with minimal relations first
+        const feedPosts = await prisma.publicacao.findMany({
             include: {
-                imagens: true,
-                autor: true,
-                comentarios: true,
-                curtidas: true
-                // REMOVED: titulo (it's a field, not a relation)
-            }
+                autor: {
+                    select: {
+                        id: true,
+                        nomeUsuario: true
+                    }
+                },
+                imagens: true
+            },
+            orderBy: {
+                criadoEm: 'desc'
+            },
+            take: 20 // Limit to 20 posts
         });
         
-        console.log('Postagens do feed:', JSON.stringify(feedPosts, null, 2));
+        console.log('Posts loaded:', feedPosts.length);
         
         res.render('feed', { 
             title: 'Feed',
             layout: 'layouts/main', 
-            posts: feedPosts  // FIXED: Changed from 'Posts' to 'posts'
+            posts: feedPosts,
+            success: req.query.success,
+            error: req.query.error
         });
+
     } catch (error) {
         console.error('Error loading feed:', error);
-        res.status(500).send('Error loading feed');
+        console.error('Error message:', error.message);
+        console.error('Error code:', error.code);
+        
+        // Try to render with empty posts instead of crashing
+        res.render('feed', { 
+            title: 'Feed',
+            layout: 'layouts/main', 
+            posts: [],
+            error: 'Erro ao carregar o feed. Tente novamente.'
+        });
     }
 };
 
