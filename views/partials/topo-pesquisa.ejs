@@ -17,11 +17,11 @@
             <img src="/imgs/foto-usuario.jpeg" alt="Perfil" class="avatar">
             <div>
                 <span>
-                    <strong>usuario:</strong> yipii
+                    <strong>usuario:</strong> <%= user && user.nomeUsuario ? user.nomeUsuario : '' %>
                     <br>
-                    <strong>email:</strong> yipii@email.com
+                    <strong>email:</strong> <%= user && user.email ? user.email : '' %>
                 </span>
-                <button id="btn-sair">
+                <button id="btn-sair" onclick="window.location.href='/logout';">
                     Sair
                 </button>
             </div>

@@ -8,25 +8,26 @@
     <script defer src='/scripts/main.js'></script> 
 </head>
 <body>
-    <% if (typeof error !== 'undefined' && error) { %>
-        <div class="alert alert-error">
-            <% if (error === 'missing_fields') { %>
-                ⚠ Por favor, preencha todos os campos.
-            <% } else if (error === 'email_mismatch') { %>
-                ✗ Os emails inseridos não são iguais.
-            <% } else if (error === 'password_mismatch') { %>
-                ✗ As senhas inseridas não são iguais.
-            <% } else if (error === 'user_exists') { %>
-                ✗ Email ou nome de usuário já cadastrado.
-            <% } else if (error === 'registration_failed') { %>
-                ✗ Erro ao cadastrar usuário. Tente novamente.
-            <% } else { %>
-                ✗ <%= error %>
-            <% } %>
-        </div>
-    <% } %>
-    <h2>Cadastro</h2>
     <form action="/cadastro" method="POST">
+        <% if (error) { %>
+            <div class="alert alert-error">
+                <% if (error === 'missing_fields') { %>
+                    ⚠ Por favor, preencha todos os campos.
+                <% } else if (error === 'email_mismatch') { %>
+                    ✗ Os emails inseridos não são iguais.
+                <% } else if (error === 'password_mismatch') { %>
+                    ✗ As senhas inseridas não são iguais.
+                <% } else if (error === 'user_exists') { %>
+                    ✗ Email ou nome de usuário já cadastrado.
+                <% } else if (error === 'registration_failed') { %>
+                    ✗ Erro ao cadastrar usuário. Tente novamente.
+                <% } else { %>
+                    ✗ <%= error %>
+                <% } %>
+            </div>
+        <% } %>
+    
+        <h2>Cadastro</h2>
         <div>
             <label for="nomeUsuario">Nome de usuário:</label>
             <input type="text" id="nomeUsuario" name="nomeUsuario" required>
@@ -53,9 +54,9 @@
         </div>
         
         <button type="submit">Cadastrar</button>
+        <p><a href="/login">Já tem conta? Faça login</a></p>
+        <p><a href="/">Voltar ao início</a></p>
     </form>
-    
-    <p><a href="/login">Já tem conta? Faça login</a></p>
-    <p><a href="/">Voltar ao início</a></p>
+
 </body>
 </html>

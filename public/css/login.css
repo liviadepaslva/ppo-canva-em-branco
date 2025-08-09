@@ -1,30 +1,32 @@
 @import url('paletas.css');
 
-body, h1, p, form, input, button, a, label, div {
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Comic Sans MS', 'Poppins', sans-serif;
-}
-
-body {
-    color: var(--cor-texto);
-    background-color: var(--cor-base);
-    background-image:
-        linear-gradient(to right, var(--cor-linha-fundo) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--cor-linha-fundo) 1px, transparent 1px);
-    background-size: 20px 20px;
-    min-height: 100vh;
     font-family: "Fredoka", sans-serif;
 }
 
-/* ------------------------------------
-    Título
----------------------------------------*/
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+} 
+
+body {
+    font-family: "Comic Sans MS", "Comic Neue", cursive;
+    background-color: var(--cor-base);
+    color: var(--cor-texto);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
 h1 {
     font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
+    color: var(--cor-acento);
 }
 
 /* ------------------------------------
@@ -32,88 +34,68 @@ h1 {
 ---------------------------------------*/
 form {
     background-color: var(--cor-base-secundaria);
-    padding: 1.5rem;
     border: 2px solid var(--cor-borda);
     border-radius: 12px;
+    padding: 20px;
+    max-width: 350px;
+    width: 90%;
     box-shadow: 4px 4px 0 var(--cor-borda);
-    width: 100%;
-    max-width: 400px;
+    margin-top: 20px;
 }
 
-form div {
-    margin-bottom: 1rem;
-}
 
 label {
     display: block;
     font-weight: bold;
-    margin-bottom: 0.4rem;
+    margin-bottom: 6px;
 }
 
-input[type="email"],
-input[type="password"] {
+input {
     width: 100%;
-    padding: 0.6rem;
+    padding: 8px;
     border: 2px solid var(--cor-borda);
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 1rem;
-    outline: none;
-    background-color: #fff;
 }
 
-input:focus {
-    border-color: var(--cor-acento);
-}
-
-/* ------------------------------------
-    Botão
----------------------------------------*/
 button {
     background-color: var(--cor-acento);
     color: white;
-    font-weight: bold;
-    padding: 0.6rem 1.2rem;
     border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 3px 3px 0 var(--cor-borda);
-    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
 
 button:hover {
     background-color: var(--cor-acento-hover);
-    transform: translateY(-2px);
 }
 
 /* ------------------------------------
     Links
 ---------------------------------------*/
-a {
+p a {
     color: var(--cor-link);
     text-decoration: none;
     font-weight: bold;
 }
 
-a:hover {
+p a:hover {
     text-decoration: underline;
 }
 
 /* ------------------------------------
-    Mensagens de alerta
+    Alertas
 ---------------------------------------*/
 .alert {
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    max-width: 400px;
-    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
     box-shadow: 2px 2px 0 var(--cor-borda);
-}
-
-.alert-success {
-    background-color: var(--cor-sucesso);
-    color: white;
 }
 
 .alert-error {
@@ -121,11 +103,7 @@ a:hover {
     color: white;
 }
 
-/* ------------------------------------
-    Responsividade
----------------------------------------*/
-@media (max-width: 480px) {
-    form {
-        padding: 1rem;
-    }
+.alert-success {
+    background-color: var(--cor-sucesso);
+    color: white;
 }

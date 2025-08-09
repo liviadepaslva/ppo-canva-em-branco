@@ -37,18 +37,23 @@
                 </div>
             </article>
         <% }); %>
-    <% } else { %>
-        <div class="no-posts">
-            <span class="material-symbols-outlined">post_add</span>
-            <h3>Nenhuma postagem encontrada</h3>
-            <p>Seja o primeiro a compartilhar sua arte!</p>
-            <button class="btn btn-primary" onclick="document.getElementById('btn-criar-postagem')?.click()">
-                <span class="material-symbols-outlined">add</span>
-                Criar Primeira Postagem
-            </button>
-        </div>
     <% } %>
+</section>
+
+<% if (!(posts && posts.length > 0)) { %>
+    <div class="no-posts">
+        <i class="fi fi-br-add-image"></i>
+        <div class="no-posts-content">
+        <h3>Nenhuma postagem encontrada</h3>
+        <p>Seja o primeiro a compartilhar sua arte!</p>
+        <button class="btn btn-primary" onclick="document.getElementById('btn-criar-postagem')?.click()">
+            <i class="fi fi-br-multiple"></i>
+            Criar Primeira Postagem
+        </button>
+    </div>
 </div>
+
+    <% } %>
 
 <style>
 .alert {

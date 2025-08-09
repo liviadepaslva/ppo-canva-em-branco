@@ -21,10 +21,10 @@ const requerAutenticacao = (req, res, next) => {
 };
 
 // rotas protegidas
-// router.get('/feed', requerAutenticacao, mostrarFeed);
-// router.post('/criar-post', requerAutenticacao, upload.single('imagem'), criarPostagem);
+router.get('/feed', requerAutenticacao, mostrarFeed);
+router.post('/criar-post', requerAutenticacao, upload.single('imagem'), criarPostagem);
 
-router.get('/feed',  mostrarFeed);
-router.post('/criar-post', upload.single('imagem'), criarPostagem);
+// router.get('/feed',  mostrarFeed);
+// router.post('/criar-post', upload.single('imagem'), criarPostagem);
 
 module.exports = router;

@@ -22,6 +22,6 @@ router.get('/cadastro', (req, res) => {
 router.post('/login', loginUsuario);
 router.post('/cadastro', cadastrarUsuario);
 
-router.post('/logout', logoutUsuario);
+router.get('/logout', logoutUsuario);
 
 module.exports = router;

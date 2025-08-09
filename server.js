@@ -5,9 +5,9 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static(path.join(__dirname, 'public'))); // serve arquivos estáticos da pasta 'public'
 app.use(express.json()); // quando recebe um json, converte para um obj javascript
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public'))); // serve arquivos estáticos da pasta 'public'
 app.use('/uploads', express.static('public/uploads')) // serve arquivos estáticos da pasta 'public/uploads'
 
 
@@ -36,8 +36,8 @@ app.use(session({
 app.use((req, res, next) => {
   res.locals.user = req.session.usuarioAutenticado ? {
     id: req.session.usuarioId,
-    email: req.session.userEmail,
-    nomeUsuario: req.session.userName
+    email: req.session.usuarioEmail,
+    nomeUsuario: req.session.usuarioNome
   } : null;
   res.locals.usuarioAutenticado = req.session.usuarioAutenticado || false;
   next();

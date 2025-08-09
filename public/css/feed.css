@@ -5,9 +5,11 @@ div.alert {
 }
 
 section.feed-container {
+    position: relative;
     width: 100%;
-    columns: 4;
+    columns: 5;
     column-gap: 1rem;
+    /* min-height: 60vh; */
 }
 
 .feed-container article.post-card {
@@ -17,6 +19,7 @@ section.feed-container {
     border: 2px solid var(--cor-borda);
     border-radius: 10px;
     margin-bottom: 1rem;
+    break-inside: avoid;
 }
 
 .feed-container article.post-card img {
@@ -54,4 +57,80 @@ article.post-card .post-actions {
 
 .post-actions .post-action-btn:hover {
     background-color: var(--cor-acento);
+}
+
+/*-------------------------------------
+caso não tenha postagens
+-------------------------------------*/
+
+/* ------------------------------------
+    Bloco de "Nenhuma postagem"
+---------------------------------------*/
+.no-posts {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+
+    background: var(--cor-base);
+    border: 2px dashed var(--cor-borda);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: 700px;
+    box-shadow: 0 4px 24px var(--cor-sombra, rgba(0,0,0,0.08));
+}
+
+/* Ícone à esquerda */
+.no-posts > i {
+    font-size: 3rem;
+    color: var(--cor-acento);
+    flex-shrink: 0;
+}
+
+/* Conteúdo à direita */
+.no-posts-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* Título */
+.no-posts-content h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* Texto */
+.no-posts-content p {
+    margin: 0 0 0.5rem;
+}
+
+/* Botão */
+.no-posts-content .btn-primary {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    background: var(--cor-acento);
+    color: var(--cor-texto);
+    font-weight: 700;
+    border: 2px solid var(--cor-borda);
+    box-shadow: 2px 2px 0 var(--cor-borda);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.no-posts-content .btn-primary > i {
+    font-size: 1.2rem;
+    color: var(--cor-texto);
+}
+
+.no-posts-content .btn-primary:hover {
+    background-color: var(--cor-acento-hover);
+    transform: translateY(-2px);
 }

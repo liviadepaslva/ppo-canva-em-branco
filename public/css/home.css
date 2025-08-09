@@ -98,6 +98,26 @@ main > div.ativo {
     background-color: #0056b3;
 }
 
+/* Estilos gerais de botões */
+.btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--cor-acento, #007bff);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    margin: 0.5rem 0.5rem 0 0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--cor-alerta, #0056b3);
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     nav {
