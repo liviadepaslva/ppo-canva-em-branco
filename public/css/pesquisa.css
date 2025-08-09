@@ -130,6 +130,11 @@ div#perfil > div#dados-perfil {
     border-radius: 10px;
     padding: 8px;
     box-shadow: 0 2px 4px var(--cor-sombra);
+    display: none;
+}
+
+div#perfil > div#dados-perfil.ativo {
+    display: flex;
 }
 
 div#dados-perfil img {

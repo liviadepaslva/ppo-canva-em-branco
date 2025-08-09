@@ -3,19 +3,21 @@
 ---------------------------------------*/
 
 body.light {
-    --cor-base: #ffffff;
-    --cor-base-secundaria: #e8ffdb;
-    --cor-texto: #000000;
-    --cor-acento: #f5a623;
-    --cor-acento-hover: #d48806;
-    --cor-borda: #000000;
+    --cor-base: #fcf9f1;
+    --cor-base-secundaria: #fff6db;
+    --cor-texto: #010007;
+    --cor-acento: #697dff;
+    --cor-acento-hover: #ada4ff;
+    --cor-borda: #010007;
+
+    --cor-linha-fundo: rgba(0, 0, 0, 0.219);
 
     --azul: #4a90e2;
     --verde: #50e3c2;
     --amarelo: #f5a623;
     --vermelho: #ff0000;
 
-    --cor-alerta: #d0021b;
+    --cor-alerta: #ee1f37;
     --cor-sucesso: #7ed321;
 
     --cor-link: #4a90e2;

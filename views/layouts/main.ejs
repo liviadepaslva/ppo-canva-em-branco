@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
     <script defer src="/scripts/main.js"></script>
 </head>
 <body class="light">
@@ -19,6 +19,9 @@
     <% if (usuarioAutenticado) { %>
         <%- include('../partials/nav-bar') %>
         <%- include('../partials/topo-pesquisa') %>
+        <main>
+            <%- body %>
+        </main>
     <% } else { %>
         <div class="auth-links">
             <a href="/login" class="auth-link">Login</a>
@@ -26,8 +29,5 @@
             <a href="/" class="auth-link">Home</a>
         </div>
     <% } %>
-    <main>
-        <%- body %>
-    </main>
 </body>
 </html>

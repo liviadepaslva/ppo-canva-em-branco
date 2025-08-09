@@ -16,11 +16,25 @@
     </a>
 </nav>
 
-<div id="form-overlay" class="form-overlay ativo"></div>
+<div id="form-overlay" class="form-overlay"></div>
 
-<form id="form-criar-postagem" class="ativo" action="/criar-post" method="post" enctype="multipart/form-data">
+<form id="form-criar-postagem" action="/criar-post" method="post" enctype="multipart/form-data">
     <button type="button" id="btn-fechar-criar-post" class="btn-fechar" aria-label="Fechar">&times;</button>
     <h3>Criar Nova Postagem</h3>
+    
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error">
+            <% if (error === 'missing_fields') { %>
+                ⚠ Por favor, preencha todos os campos obrigatórios.
+            <% } else if (error === 'no_content') { %>
+                ⚠ Por favor, adicione um conteúdo ou uma imagem.
+            <% } else if (error === 'creation_failed') { %>
+                ✗ Erro ao criar postagem. Tente novamente.
+            <% } else { %>
+                ✗ <%= error %>
+            <% } %>
+        </div>
+    <% } %>
     
     <div class="campo-forms">
         <label for="titulo">Título *</label>

@@ -1,27 +1,17 @@
 <!-- Show success/error messages -->
-    <% if (typeof success !== 'undefined' && success) { %>
-        <div class="alert alert-success">
-            <% if (success === 'post_criado') { %>
-                ✓ Postagem criada com sucesso!
-            <% } %>
-        </div>
-    <% } %>
-    
-    <% if (typeof error !== 'undefined' && error) { %>
-        <div class="alert alert-error">
-            <% if (error === 'missing_fields') { %>
-                ⚠ Por favor, preencha todos os campos obrigatórios.
-            <% } else if (error === 'no_content') { %>
-                ⚠ Por favor, adicione um conteúdo ou uma imagem.
-            <% } else if (error === 'creation_failed') { %>
-                ✗ Erro ao criar postagem. Tente novamente.
-            <% } else { %>
-                ✗ <%= error %>
-            <% } %>
-        </div>
-    <% } %>
+<% if (typeof success !== 'undefined' && success) { %>
+    <div class="alert alert-success" id="alert-message">
+        <% if (success === 'post_criado') { %>
+            ✓ Postagem criada com sucesso!
+        <% } %>
+    </div>
+<% } else if (error === 'creation_failed') { %>
+    <div class="alert alert-error" id="alert-message">
+        ✗ Erro ao criar postagem. Tente novamente.
+    </div>
+<% } %>
 
-<div class="feed-container">
+<section class="feed-container">
     <% if (posts && posts.length > 0) { %>
         <% posts.forEach(post => { %>
             <article class="post-card">
@@ -31,41 +21,19 @@
                             <img src="<%= imagem.url %>" alt="<%= post.titulo %>" class="post-image">
                         <% }); %>
                     </div>
-                <% } else { %>
-                    <div class="no-image-placeholder">
-                        <span class="material-symbols-outlined">image</span>
-                        <p>Sem imagem</p>
-                    </div>
+                <% } // carrega as imagens
+                
+                else { %>
+                    <img src="/imgs/image-placeholder.jpg" alt="postagem sem imagem" class="post-image">
                 <% } %>
-                <div class="post-card-content">
-                    <h3><%= post.titulo %></h3>
-                    <% if (post.conteudo) { %>
-                        <p><%= post.conteudo %></p>
-                    <% } %>
-                    <div class="post-meta">
-                        <div class="d-flex align-center gap-2">
-                            <% if (post.autor) { %>
-                                <span class="post-author">@<%= post.autor.nomeUsuario %></span>
-                            <% } %>
-                        </div>
-                        <div class="d-flex align-center gap-2">
-                            <span class="post-category"><%= post.categoria %></span>
-                        </div>
-                    </div>
-                </div>
+                <h3 class="post-title"><%= post.titulo %></h3>
                 <div class="post-actions">
                     <button class="post-action-btn">
-                        <span class="material-symbols-outlined">favorite_border</span>
-                        <span>Curtir</span>
+                        <i class="fi fi-br-heart"></i>
                     </button>
                     <button class="post-action-btn">
-                        <span class="material-symbols-outlined">comment</span>
-                        <span>Comentar</span>
-                    </button>
-                    <button class="post-action-btn">
-                        <span class="material-symbols-outlined">share</span>
-                        <span>Compartilhar</span>
-                    </button>
+                       <i class="fi fi-br-comment-alt"></i>
+                    </button> 
                 </div>
             </article>
         <% }); %>
