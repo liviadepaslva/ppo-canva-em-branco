@@ -1,48 +1,45 @@
-<!-- Navigation Bar -->
 <nav>
-    <img src="/imgs/logo.png" alt="Logo" class="logo">
     <a href="/feed" class="item" aria-label="Página inicial">
-        <span class="material-symbols-outlined">home</span>
+        <i class="fi fi-rc-home"></i>
     </a>
     <a href="#" class="item" aria-label="Explorar">
-        <span class="material-symbols-outlined">explore</span>
+        <i class="fi fi-br-compass-alt"></i>
     </a>
     <button id="btn-criar-postagem" class="item" aria-label="Criar Postagem">
-        <span class="material-symbols-outlined">add_box</span>
+        <i class="fi fi-br-edit"></i>
     </button>
     <a href="#" class="item" aria-label="Notificações">
-        <span class="material-symbols-outlined">developer_guide</span>
+        <i class="fi fi-br-bell"></i>
     </a>
     <a href="#" class="item" aria-label="Configurações">
-        <span class="material-symbols-outlined">settings</span>
+        <i class="fi fi-rc-settings"></i>
     </a>
 </nav>
 
-<!-- Overlay for form -->
-<div id="form-overlay" class="form-overlay"></div>
+<div id="form-overlay" class="form-overlay ativo"></div>
 
-<!-- Create post form -->
-<form id="criar-postagem" class="form-criar-postagem" action="/feed" method="post" enctype="multipart/form-data">
+<form id="form-criar-postagem" class="ativo" action="/criar-post" method="post" enctype="multipart/form-data">
     <button type="button" id="btn-fechar-criar-post" class="btn-fechar" aria-label="Fechar">&times;</button>
     <h3>Criar Nova Postagem</h3>
     
-    <div class="form-group">
+    <div class="campo-forms">
         <label for="titulo">Título *</label>
         <input type="text" id="titulo" name="titulo" required placeholder="Digite o título da sua postagem">
     </div>
     
-    <div class="form-group">
+    <div class="campo-forms">
         <label for="conteudo">Conteúdo</label>
         <textarea id="conteudo" name="conteudo" placeholder="Descreva sua obra ou pensamento..." rows="4"></textarea>
     </div>
     
-    <div class="form-group">
-        <label for="imagem">Imagem</label>
+    <div class="campo-forms">
+        <label for="imagem">Imagens</label>
         <input type="file" id="imagem" name="imagem" accept="image/*">
-        <small>Formatos aceitos: JPG, PNG, GIF (máx. 5MB)</small>
+        <small>Formatos aceitos: JPG, PNG, GIF (máx. 5MB cada)</small>
+        <div id="image-preview-list"></div>
     </div>
     
-    <div class="form-group">
+    <div class="campo-forms">
         <label for="categoria">Categoria *</label>
         <select id="categoria" name="categoria" required>
             <option value="">Selecione uma categoria</option>

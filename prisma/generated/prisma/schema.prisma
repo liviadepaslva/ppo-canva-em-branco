@@ -16,15 +16,14 @@ model Usuario {
   senhaHash   String
   criadoEm    DateTime @default(now())
 
-  // Relations
-  publicacoes Publicacao[]
+  posts       Post[]
   comentarios Comentario[]
   curtidas    Curtida[]
 
   @@map("usuarios")
 }
 
-model Publicacao {
+model Post {
   id        Int      @id @default(autoincrement())
   titulo    String
   conteudo  String?
@@ -38,46 +37,46 @@ model Publicacao {
   comentarios Comentario[]
   curtidas    Curtida[]
 
-  @@map("publicacoes")
+  @@map("posts")
 }
 
 model Imagem {
-  id           Int     @id @default(autoincrement())
-  url          String
-  descricao    String?
-  ordem        Int     @default(1)
-  publicacaoId Int
+  id        Int     @id @default(autoincrement())
+  url       String
+  descricao String?
+  ordem     Int     @default(1)
+  postId    Int
 
   // Relations
-  publicacao Publicacao @relation(fields: [publicacaoId], references: [id], onDelete: Cascade)
+  publicacao Post @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@map("imagens")
 }
 
 model Comentario {
-  id           Int      @id @default(autoincrement())
-  conteudo     String
-  criadoEm     DateTime @default(now())
-  autorId      Int
-  publicacaoId Int
+  id       Int      @id @default(autoincrement())
+  conteudo String
+  criadoEm DateTime @default(now())
+  autorId  Int
+  postId   Int
 
   // Relations
-  autor      Usuario    @relation(fields: [autorId], references: [id], onDelete: Cascade)
-  publicacao Publicacao @relation(fields: [publicacaoId], references: [id], onDelete: Cascade)
+  autor      Usuario @relation(fields: [autorId], references: [id], onDelete: Cascade)
+  publicacao Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@map("comentarios")
 }
 
 model Curtida {
-  id           Int @id @default(autoincrement())
-  autorId      Int
-  publicacaoId Int
+  id      Int @id @default(autoincrement())
+  autorId Int
+  postId  Int
 
   // Relations
-  autor      Usuario    @relation(fields: [autorId], references: [id], onDelete: Cascade)
-  publicacao Publicacao @relation(fields: [publicacaoId], references: [id], onDelete: Cascade)
+  autor      Usuario @relation(fields: [autorId], references: [id], onDelete: Cascade)
+  publicacao Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   // Prevent duplicate likes
-  @@unique([autorId, publicacaoId])
+  @@unique([autorId, postId])
   @@map("curtidas")
 }

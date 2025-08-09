@@ -1,3 +1,5 @@
+@import url('paletas.css');
+
 nav {
     position: fixed;
     top: 11dvh;
@@ -9,21 +11,48 @@ nav {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--cor-secundaria);
-    z-index: 3;
+    background-color: var(--cor-base-secundaria);
+    z-index: 4;
     border-right: 2px solid var(--cor-borda);
     box-shadow: 0 2px 4px rgba(13, 0, 84, 0.268);
 }
 
 nav a {
-    height: 45px;
-    width: 45px;
+    text-decoration: none;
+}
+
+nav a,
+nav button {
     display: grid;
     place-items: center;
+    font-size: 1.8rem;
+    padding: 0.2rem;
+    padding-bottom: 0;
+    width: 48px;
+    height: 48px;
     background-color: transparent;
     border-radius: 30%;
     transition: 0.1s ease-in;
     color: var(--cor-texto);
+}
+
+nav button#btn-criar-postagem {
+    background-color: var(--cor-acento, #f5a623);
+    border: none;
+    border-radius: 10px;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    font-size: 1.8rem;
+    box-shadow: 0 2px 8px var(--cor-sombra, rgba(0,0,0,0.12));
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+nav button#btn-criar-postagem:hover {
+    background-color: var(--cor-alerta, #d0021b);
+    transform: scale(1.08);
 }
 
 nav a:last-child {
@@ -31,7 +60,8 @@ nav a:last-child {
 }
 
 nav a:hover {
-    background-color: var(--cor-base);
+    background-color: var(--cor-acento);
+    box-shadow: 0 2px 8px var(--cor-sombra, rgba(0,0,0,0.12));
 }
 
 nav img.logo {
@@ -40,10 +70,6 @@ nav img.logo {
     border-radius: 40%;
 }
 
-nav a .material-symbols-outlined {
-    text-align: center;
-    font-size: 2.4rem;
-}
 
 /* ---------------------------
    Responsividade
@@ -74,5 +100,165 @@ nav a .material-symbols-outlined {
 
     nav img.logo {
         display: none;
+    }
+}
+
+/* ---------------------------
+   formulario
+--------------------------- */
+#form-overlay.form-overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    background-color: rgba(214, 9, 9, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 5;
+    display: none; /* inicialmente oculto */
+}
+
+/* Mostrar o overlay quando ativo (exemplo: adiciona classe 'ativo' para exibir) */
+#form-overlay.form-overlay.ativo {
+    display: block;
+}
+
+/* Formulário centralizado na tela */
+form#form-criar-postagem {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--cor-base, #fff);
+    border-radius: 12px;
+    padding: 2rem 2.5rem;
+    width: 50%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 24px var(--cor-sombra, rgba(0, 0, 0, 0.25));
+    z-index: 6;
+    color: var(--cor-texto, #222);
+    display: none;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+form#form-criar-postagem.ativo {
+    display: flex;
+}
+
+form#form-criar-postagem .campo-forms {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+form#form-criar-postagem label {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--cor-texto, #222);
+}
+
+form#form-criar-postagem input[type="text"],
+form#form-criar-postagem textarea,
+form#form-criar-postagem select,
+form#form-criar-postagem input[type="file"] {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    border: 1.8px solid var(--cor-borda, #ccc);
+    border-radius: 8px;
+    background-color: var(--cor-base-secundaria, #fafafa);
+    color: var(--cor-texto, #222);
+    transition: border-color 0.3s ease;
+}
+
+form#form-criar-postagem input[type="text"]:focus,
+form#form-criar-postagem textarea:focus,
+form#form-criar-postagem select:focus,
+form#form-criar-postagem input[type="file"]:focus {
+    outline: none;
+    border-color: var(--cor-acento, #f5a623);
+    background-color: #fff;
+}
+
+form#form-criar-postagem textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+form#form-criar-postagem small {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.2rem;
+}
+
+form#form-criar-postagem .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+form#form-criar-postagem button.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--cor-borda, #ccc);
+    color: var(--cor-texto, #222);
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.25s, border-color 0.25s;
+}
+
+form#form-criar-postagem button.btn-secondary:hover,
+form#form-criar-postagem button.btn-secondary:focus {
+    background-color: var(--cor-base-secundaria, #f0f0f0);
+    border-color: var(--cor-acento, #f5a623);
+    outline: none;
+}
+
+form#form-criar-postagem button.btn-primary {
+    background-color: var(--cor-acento, #f5a623);
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1.8rem;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form#form-criar-postagem button.btn-primary:hover,
+form#form-criar-postagem button.btn-primary:focus {
+    background-color: var(--cor-alerta, #d0021b);
+    outline: none;
+}
+
+/* Botão de fechar no canto superior direito */
+form#form-criar-postagem button.btn-fechar {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--cor-texto, #222);
+    transition: color 0.2s;
+}
+
+form#form-criar-postagem button.btn-fechar:hover,
+form#form-criar-postagem button.btn-fechar:focus {
+    color: var(--cor-acento, #f5a623);
+    outline: none;
+}
+
+/* Responsivo - formulário ocupa 95% largura em telas pequenas */
+@media (max-width: 480px) {
+    form#form-criar-postagem {
+        width: 95vw;
+        padding: 1.5rem 1.5rem;
     }
 }

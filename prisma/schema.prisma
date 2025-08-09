@@ -15,16 +15,15 @@ model Usuario {
   email       String   @unique
   senhaHash   String
   criadoEm    DateTime @default(now())
-  
-  // Relations
-  publicacoes Publicacao[]
+
+  posts      Post[]
   comentarios Comentario[]
   curtidas    Curtida[]
   
   @@map("usuarios")
 }
 
-model Publicacao {
+model Post {
   id        Int      @id @default(autoincrement())
   titulo    String
   conteudo  String?
@@ -38,7 +37,7 @@ model Publicacao {
   comentarios Comentario[]
   curtidas    Curtida[]
   
-  @@map("publicacoes")
+  @@map("posts")
 }
 
 model Imagem {
@@ -46,10 +45,10 @@ model Imagem {
   url          String
   descricao    String?
   ordem        Int    @default(1)
-  publicacaoId Int
-  
+  postId      Int
+
   // Relations
-  publicacao Publicacao @relation(fields: [publicacaoId], references: [id], onDelete: Cascade)
+  publicacao Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   
   @@map("imagens")
 }
@@ -59,11 +58,11 @@ model Comentario {
   conteudo     String
   criadoEm     DateTime @default(now())
   autorId      Int
-  publicacaoId Int
+  postId Int
   
   // Relations
   autor      Usuario     @relation(fields: [autorId], references: [id], onDelete: Cascade)
-  publicacao Publicacao  @relation(fields: [publicacaoId], references: [id], onDelete: Cascade)
+  publicacao Post  @relation(fields: [postId], references: [id], onDelete: Cascade)
   
   @@map("comentarios")
 }
@@ -71,13 +70,13 @@ model Comentario {
 model Curtida {
   id           Int @id @default(autoincrement())
   autorId      Int
-  publicacaoId Int
+  postId Int
   
   // Relations
   autor      Usuario     @relation(fields: [autorId], references: [id], onDelete: Cascade)
-  publicacao Publicacao  @relation(fields: [publicacaoId], references: [id], onDelete: Cascade)
+  publicacao Post  @relation(fields: [postId], references: [id], onDelete: Cascade)
   
   // Prevent duplicate likes
-  @@unique([autorId, publicacaoId])
+  @@unique([autorId, postId])
   @@map("curtidas")
 }

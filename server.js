@@ -1,96 +1,57 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
-const expressLayouts = require('express-ejs-layouts');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Import routes
-const authRoutes = require('./routes/authRoutes');
-const postRoutes = require('./routes/postRoutes');
-
-// Middleware
-app.use(express.json());
+app.use(express.json()); // quando recebe um json, converte para um obj javascript
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'))); // serve arquivos estáticos da pasta 'public'
+app.use('/uploads', express.static('public/uploads')) // serve arquivos estáticos da pasta 'public/uploads'
 
-// Session configuration
-const session = require('express-session');
 
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'seuSegredoSuperSecreto',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: false, // Set to true in production with HTTPS
-    maxAge: 1000 * 60 * 60 // 1 hour
-  }
-}));
+// configuração do ejs
+const expressLayouts = require('express-ejs-layouts');
 
-// GLOBAL middleware - makes user data available to ALL views
-app.use((req, res, next) => {
-  res.locals.user = req.session.isAuthenticated ? {
-    id: req.session.userId,
-    email: req.session.userEmail,
-    nomeUsuario: req.session.userName
-  } : null;
-  res.locals.isAuthenticated = req.session.isAuthenticated || false;
-  next();
-});
-
-// View engine setup
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.set('layout', 'layouts/main');
 
-// Add this temporary test route to debug the database
-app.get('/debug-db', async (req, res) => {
-    try {
-        const { PrismaClient } = require('./prisma/generated/prisma');
-        const testPrisma = new PrismaClient();
-        
-        // Test connection
-        await testPrisma.$connect();
-        
-        // Get schema info
-        const publicacoes = await testPrisma.publicacao.findMany({
-            take: 1
-        });
-        
-        const usuarios = await testPrisma.usuario.findMany({
-            take: 1
-        });
-        
-        await testPrisma.$disconnect();
-        
-        res.json({
-            status: 'success',
-            publicacoes: publicacoes,
-            usuarios: usuarios,
-            message: 'Database accessible'
-        });
-        
-    } catch (error) {
-        console.error('Database debug error:', error);
-        res.json({
-            status: 'error',
-            message: error.message,
-            code: error.code
-        });
-    }
+// configura a sessão
+const session = require('express-session');
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false, // só gera caso usuário faça login
+  cookie: {
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 24 // um dia
+  }
+}));
+
+// middleware para deixar os dados do usuário disponível em todas as views
+app.use((req, res, next) => {
+  res.locals.user = req.session.usuarioAutenticado ? {
+    id: req.session.usuarioId,
+    email: req.session.userEmail,
+    nomeUsuario: req.session.userName
+  } : null;
+  res.locals.usuarioAutenticado = req.session.usuarioAutenticado || false;
+  next();
 });
 
-app.get('/debug-session', (req, res) => {
-    res.json({
-        session: req.session,
-        isAuthenticated: req.session.isAuthenticated,
-        userId: req.session.userId
-    });
-});
+// importa as rotas
+const authRoutes = require('./routes/authRoutes');
+const postRoutes = require('./routes/postRoutes');
 
-// Routes
+app.use('/', authRoutes);
+app.use('/', postRoutes);
+
+// rotas
+
 app.get('/', (req, res) => {
     res.render('index', { 
         title: 'Home',
@@ -105,23 +66,57 @@ app.get('/teste-css', (req, res) => {
     });
 });
 
-// Add route for criar-post page
-app.get('/criar-post', (req, res) => {
-    // Check if user is authenticated
-    if (!req.session.isAuthenticated) {
-        return res.redirect('/login');
-    }
-    
-    res.render('criar-post', { 
-        title: 'Criar Postagem',
-        layout: 'layouts/main'
-    });
-});
 
-// Use route modules
-app.use('/', authRoutes);
-app.use('/', postRoutes);
+// ---------------------------------
+// debug do banco de dados e sessão
+// ---------------------------------
+
+// app.get('/debug-db', async (req, res) => {
+//     try {
+//         const { PrismaClient } = require('./prisma/generated/prisma');
+//         const testPrisma = new PrismaClient();
+        
+//         // Test connection
+//         await testPrisma.$connect();
+        
+//         // Get schema info
+//         const publicacoes = await testPrisma.publicacao.findMany({
+//             take: 1
+//         });
+        
+//         const usuarios = await testPrisma.usuario.findMany({
+//             take: 1
+//         });
+        
+//         await testPrisma.$disconnect();
+        
+//         res.json({
+//             status: 'success',
+//             publicacoes: publicacoes,
+//             usuarios: usuarios,
+//             message: 'Database accessible'
+//         });
+        
+//     } catch (error) {
+//         console.error('Database debug error:', error);
+//         res.json({
+//             status: 'error',
+//             message: error.message,
+//             code: error.code
+//         });
+//     }
+// });
+
+// app.get('/debug-session', (req, res) => {
+//     res.json({
+//         session: req.session,
+//         usuarioAutenticado: req.session.usuarioAutenticado,
+//         usuarioId: req.session.usuarioId
+//     });
+// });
+
+
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Servidor rodando na porta ${PORT}`);
 });

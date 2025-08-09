@@ -1,38 +1,44 @@
+@import url('paletas.css');
+
 /* ---------------------------
    Cabeçalho e barra de pesquisa
 --------------------------- */
+
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 11dvh;
-    background-color: var(--cor-primaria);
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 7rem;
-    z-index: 4;
+    background-color: var(--cor-base-secundaria);
     border-bottom: 2px solid var(--cor-borda);
+    z-index: 4;
     box-shadow: 0 2px 4px rgba(13, 0, 84, 0.268);
 }
 
 header form.barra-pesquisar {
+    width: 85%;
+    height: 7dvh;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
 }
 
+/* ------ formulário da barra de pesquisa -------*/
+
 form.barra-pesquisar input#barra-pesquisar {
-    height: 7dvh;
+    height: 100%;
     width: 100%;
+    padding: 10px 20px;
     border: 2px solid var(--cor-borda);
     border-right: none;
     border-radius: 10px 0 0 10px;
-    padding: 10px 20px;
-    font-size: 1rem;
+    box-sizing: border-box;
     background-color: var(--cor-base);
+    font-size: 1rem;
+    color: var(--cor-texto);
 }
 
 form.barra-pesquisar input#barra-pesquisar:focus {
@@ -40,39 +46,57 @@ form.barra-pesquisar input#barra-pesquisar:focus {
 }
 
 form.barra-pesquisar button#btn-pesquisar {
-    height: 7dvh;
-    width: 8dvh;
-    background-color: var(--cor-secundaria);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 7dvh;
+    padding: 10px 20px;
+    background-color: var(--cor-acento);
     border: 2px solid var(--cor-borda);
+    color: var(--cor-texto);
     border-radius: 0 10px 10px 0;
     cursor: pointer;
     transition: background-color 0.3s;
-    text-align: center;
+    box-sizing: border-box;
 }
 
+
 form.barra-pesquisar button#btn-pesquisar:hover {
-    background-color: var(--cor-terciaria);
+    background-color: var(--cor-acento-hover);
 }
 
 /* ---------------------------
    Dados do perfil
 --------------------------- */
-div#perfil {
+
+
+header div#perfil {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    height: 7dvh;
 }
 
-div#perfil img.avatar {
+header div#perfil img.avatar {
     border-radius: 50%;
-    border: 2px solid var(--cor-borda);
+    border: solid 2px var(--cor-borda);
 }
 
-div#perfil button#mostrar-dados-perfil {
+header div#perfil > * > img.avatar {
+    height: 50px;
+    width: 50px;
+}
+
+header div#perfil button#mostrar-dados-perfil {
+    height: 6dvh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     margin-left: 10px;
-    width: 32px;
-    height: 32px;
+    padding: 4px 0;
     background-color: transparent;
     border: none;
     border-radius: 10px;
@@ -83,67 +107,60 @@ div#perfil button#mostrar-dados-perfil {
     transition: background-color 0.3s;
 }
 
-div#perfil button#mostrar-dados-perfil > span {
-    font-size: 40px;
+div#perfil button#mostrar-dados-perfil > i {
+    padding: 0.1rem;
+    padding-bottom: 0;
+    font-size: 35px;
     color: var(--cor-texto);
 }
 
 div#perfil button#mostrar-dados-perfil:hover {
-    background-color: var(--cor-secundaria);
+    background-color: var(--cor-acento-hover);
 }
 
-div#perfil div#dados-perfil {
-    color: var(--cor-texto);
-    position: absolute;
-    top: 110%;
-    right: 0;
+div#perfil > div#dados-perfil {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 120%;
+    right: 0;
     background-color: var(--cor-base);
     border: 2px solid var(--cor-borda);
     border-radius: 10px;
-    padding: 0.8rem;
-    box-shadow: 0 2px 4px rgba(13, 0, 84, 0.268);
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease-in;
+    padding: 8px;
+    box-shadow: 0 2px 4px var(--cor-sombra);
 }
 
-div#perfil div#dados-perfil.mostrar {
-    display: flex;
-    opacity: 1;
-}
-
-div#perfil > a > img.avatar {
-    height: 50px;
-    width: 50px;
-}
-
-div#dados-perfil > img.avatar {
-    width: 80px;
+div#dados-perfil img {
     height: 80px;
-    border-radius: 50%;
-    margin-right: 20px;
+    width: 80px;
 }
 
 div#dados-perfil > div {
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     white-space: nowrap;
 }
 
 div#dados-perfil > div > button#btn-sair {
+    width: 60%;
     margin-top: 10px;
     border: 2px solid var(--cor-borda);
-    padding: 0.4rem 0.9rem;
-    background-color: var(--cor-primaria);
+    padding: 0.2rem 0.4rem;
+    background-color: var(--cor-acento);
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    color: var(--cor-texto);
 }
 
 div#dados-perfil > div > button#btn-sair:hover {
-    background-color: var(--cor-secundaria);
+    background-color: var(--cor-alerta);
+
 }
 
 /* ---------------------------

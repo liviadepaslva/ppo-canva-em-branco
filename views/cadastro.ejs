@@ -5,15 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title || 'Cadastro' %></title>
     <link rel='stylesheet' type='text/css' media='screen' href='/css/main.css'>
-    <script defer src='/js/main.js'></script> 
+    <script defer src='/scripts/main.js'></script> 
 </head>
 <body>
-    <% if (mensagem) { %>
-        <div class="mensagem <%= mensagem.includes('sucesso') ? 'success' : 'error' %>">
-            <%= mensagem %>
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error">
+            <% if (error === 'missing_fields') { %>
+                ⚠ Por favor, preencha todos os campos.
+            <% } else if (error === 'email_mismatch') { %>
+                ✗ Os emails inseridos não são iguais.
+            <% } else if (error === 'password_mismatch') { %>
+                ✗ As senhas inseridas não são iguais.
+            <% } else if (error === 'user_exists') { %>
+                ✗ Email ou nome de usuário já cadastrado.
+            <% } else if (error === 'registration_failed') { %>
+                ✗ Erro ao cadastrar usuário. Tente novamente.
+            <% } else { %>
+                ✗ <%= error %>
+            <% } %>
         </div>
     <% } %>
-    
     <h2>Cadastro</h2>
     <form action="/cadastro" method="POST">
         <div>

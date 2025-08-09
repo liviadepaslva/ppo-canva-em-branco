@@ -5,11 +5,30 @@
     <title><%= title %></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='/css/main.css'>
-    <script defer src='/js/main.js'></script> 
+    <script defer src='/scripts/main.js'></script> 
 </head>
 <body>
-    <% if (mensagem) { %>
-        <p class="mensagem"><%= mensagem %></p>
+    <% if (typeof success !== 'undefined' && success) { %>
+        <div class="alert alert-success">
+            <% if (success === 'registration_success') { %>
+                ✓ Cadastro realizado com sucesso! Faça login.
+            <% } %>
+        </div>
+    <% } %>
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error">
+            <% if (error === 'missing_fields') { %>
+                ⚠ Por favor, preencha todos os campos.
+            <% } else if (error === 'email_not_found') { %>
+                ✗ E-mail não cadastrado.
+            <% } else if (error === 'wrong_password') { %>
+                ✗ Senha incorreta.
+            <% } else if (error === 'login_failed') { %>
+                ✗ Erro ao realizar login. Tente novamente.
+            <% } else { %>
+                ✗ <%= error %>
+            <% } %>
+        </div>
     <% } %>
     <h1>Login</h1>
     <form action="/login" method="POST">

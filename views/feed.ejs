@@ -1,8 +1,7 @@
-<div class="feed-container">
-    <!-- Show success/error messages -->
+<!-- Show success/error messages -->
     <% if (typeof success !== 'undefined' && success) { %>
         <div class="alert alert-success">
-            <% if (success === 'post_created') { %>
+            <% if (success === 'post_criado') { %>
                 ✓ Postagem criada com sucesso!
             <% } %>
         </div>
@@ -21,26 +20,28 @@
             <% } %>
         </div>
     <% } %>
-    
+
+<div class="feed-container">
     <% if (posts && posts.length > 0) { %>
         <% posts.forEach(post => { %>
             <article class="post-card">
                 <% if (post.imagens && post.imagens.length > 0) { %>
-                    <img src="<%= post.imagens[0].url %>" alt="<%= post.titulo %>" class="post-image">
+                    <div class="post-images">
+                        <% post.imagens.forEach(imagem => { %>
+                            <img src="<%= imagem.url %>" alt="<%= post.titulo %>" class="post-image">
+                        <% }); %>
+                    </div>
                 <% } else { %>
                     <div class="no-image-placeholder">
                         <span class="material-symbols-outlined">image</span>
                         <p>Sem imagem</p>
                     </div>
                 <% } %>
-
                 <div class="post-card-content">
                     <h3><%= post.titulo %></h3>
-
                     <% if (post.conteudo) { %>
                         <p><%= post.conteudo %></p>
                     <% } %>
-                    
                     <div class="post-meta">
                         <div class="d-flex align-center gap-2">
                             <% if (post.autor) { %>
@@ -52,7 +53,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="post-actions">
                     <button class="post-action-btn">
                         <span class="material-symbols-outlined">favorite_border</span>
