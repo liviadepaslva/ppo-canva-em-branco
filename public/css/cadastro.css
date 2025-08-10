@@ -1,137 +1,214 @@
 @import url('paletas.css');
 
+/* Importa a fonte do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Kalam:wght@400;700&display=swap' );
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Fredoka", sans-serif;
 }
 
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-} 
+}
 
-/* Background and base styles */
 body {
-    color: var(--cor-texto);
+    font-family: "Kalam", cursive;
     background-color: var(--cor-base);
-    background-image:
-        linear-gradient(to right, var(--cor-linha-fundo) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--cor-linha-fundo) 1px, transparent 1px);
-    background-size: 20px 20px;
+    color: var(--cor-texto);
+    padding: 20px; /* Espaçamento para telas pequenas */
     min-height: 100vh;
-    font-family: "Fredoka", sans-serif;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+    /* Fundo de caderno pautado */
+    background-image:
+        linear-gradient(var(--cor-linha-fundo) 1px, transparent 1px);
+    background-size: 100% 2.2rem;
+    line-height: 2.2rem;
 }
 
-/* Center the form container */
+/* ------------------------------------
+    Formulário Estilo Caderno
+---------------------------------------*/
 form {
-    background: var(--cor-base-secundaria, #fff);
-    border-radius: 16px;
-    box-shadow: 0 4px 24px var(--cor-sombra, rgba(0,0,0,0.12));
-    padding: 1rem 2.5rem;
-    max-width: 400px;
-    width: 100%;
-    margin: 2rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+    font-family: "Fredoka", sans-serif;
+    background-color: var(--cor-base-secundaria);
+    border: 2px solid var(--cor-borda);
+    border-radius: 15px 3px 15px 3px;
+    padding: 25px 30px;
+    width: 90%; /* Largura para telas pequenas */
+    max-width: 450px; /* Largura máxima para telas pequenas */
+    box-shadow: 5px 5px 0 var(--cor-borda);
+    margin: 20px auto; /* Margem para telas pequenas */
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Title */
+/* Efeito de "clipe de papel" */
+form::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    width: 60px;
+    height: 30px;
+    background-color: #ffc857;
+    border: 2px solid var(--cor-borda);
+    border-radius: 5px;
+    transform: rotate(-15deg);
+    box-shadow: 2px 2px 0 var(--cor-borda);
+    margin-top: 3rem;
+}
+
 h1, h2 {
+    font-size: 2.8rem;
+    color: var(--cor-acento);
     text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 25px;
+    text-shadow: 4px 4px 0px var(--cor-borda);
 }
 
-/* Labels and inputs */
+/* ... (o restante das regras para label, input, button, etc. continua igual) ... */
+
 label {
-    font-weight: 500;
-    color: var(--cor-texto);
-    margin-bottom: 0.3rem;
     display: block;
-}
-
-input, textarea {
-    font-family: inherit;
-    font-size: 1rem;
-    padding: 0.5rem 0.75rem;
-    border: 1.8px solid var(--cor-borda, #ccc);
-    border-radius: 8px;
-    background-color: #fff;
-    color: var(--cor-texto);
-    transition: border-color 0.3s;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--cor-acento);
-    background-color: #fff;
-}
-
-/* Submit button */
-button[type="submit"] {
-    background-color: var(--cor-acento, #4a90e2);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
     font-weight: 700;
-    padding: 0.7rem 1.5rem;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-bottom: 3px dashed var(--cor-acento);
+    background-color: transparent;
+    font-family: "Kalam", cursive;
+    font-size: 1.2rem;
+    color: var(--cor-texto);
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 3px solid var(--cor-acento-hover);
+}
+
+button[type="submit"] {
+    background-color: var(--cor-acento);
+    color: white;
+    border: 2px solid var(--cor-borda);
+    padding: 12px 15px;
+    font-size: 1.2rem;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.2s;
-    margin-top: 1rem;
+    width: 100%;
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
+    box-shadow: 3px 3px 0 var(--cor-borda);
+    transition: all 0.2s ease-in-out;
+    margin-top: 10px;
 }
 
 button[type="submit"]:hover {
-    background-color: var(--cor-alerta, #0056b3);
+    background-color: var(--cor-acento-hover);
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0 var(--cor-borda);
 }
 
-/* Links */
-a {
-    color: var(--cor-link, #4a90e2);
-    text-decoration: none;
-    transition: color 0.2s;
-    font-weight: 500;
+button[type="submit"]:active {
+    transform: translateY(1px);
+    box-shadow: 2px 2px 0 var(--cor-borda);
+}
+
+form p {
     text-align: center;
-    display: block;
-    margin-top: 0.5rem;
+    margin-top: 20px;
+    line-height: 1.5;
 }
 
-a:hover {
-    color: var(--cor-acento);
+form p a {
+    color: var(--cor-link);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 3px 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+form p a:hover {
+    background-color: var(--cor-link);
+    color: white;
+    text-decoration: none;
 }
 
 .alert {
-    border-radius: 6px;
-    font-weight: bold;
-    box-shadow: 2px 2px 0 var(--cor-borda);
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
+    border: 2px solid var(--cor-borda);
+    box-shadow: 3px 3px 0 var(--cor-borda);
+    width: 90%;
+    max-width: 450px;
+    margin: 0 auto 20px auto;
+    text-align: center;
+    color: var(--cor-borda);
 }
 
 .alert-error {
     background-color: var(--cor-alerta);
-    color: white;
 }
 
 .alert-success {
     background-color: var(--cor-sucesso);
-    color: white;
 }
 
-/* Responsive adjustments */
-@media (max-width: 500px) {
-    form {
-        padding: 1rem;
-        max-width: 95vw;
+
+/* ------------------------------------
+    Estilos para Telas Maiores (Desktop)
+---------------------------------------*/
+@media (min-width: 768px) {
+    body {
+        /* Centraliza o conteúdo na tela */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
     }
+
+    .alert {
+        /* Posiciona o alerta acima do formulário, mas ainda na área central */
+        margin-bottom: 20px;
+        position: relative; /* Garante que fique no fluxo normal */
+        width: 100%;
+        max-width: 650px; /* Largura do alerta */
+    }
+
+    form {
+        width: 100%;
+        max-width: 650px; /* Aumenta a largura máxima do formulário */
+        margin: 0; /* Remove a margem superior/inferior pois o body já centraliza */
+        padding: 35px 45px; /* Aumenta o espaçamento interno */
+    }
+
+    /* Para o formulário de cadastro, podemos usar 2 colunas */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
+        gap: 0 25px; /* Espaçamento entre as colunas */
+    }
+
+    .form-grid .full-width {
+        grid-column: 1 / -1; /* Faz o elemento ocupar as duas colunas */
+    }
+
     h1, h2 {
-        font-size: 1.5rem;
+        font-size: 3.2rem;
     }
 }

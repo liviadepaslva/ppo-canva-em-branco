@@ -2,6 +2,7 @@
     paletas de cores - modo claro
 ---------------------------------------*/
 
+body,
 body.light {
     --cor-base: #fcf9f1;
     --cor-base-secundaria: #fff6db;
@@ -9,6 +10,7 @@ body.light {
     --cor-acento: #697dff;
     --cor-acento-hover: #ada4ff;
     --cor-borda: #010007;
+    --cor-aba-inativa: #517ae0;
 
     --cor-linha-fundo: rgba(0, 0, 0, 0.219);
 

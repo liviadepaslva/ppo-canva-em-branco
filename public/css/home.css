@@ -1,136 +1,200 @@
-main.css
-/* Reset básico */
+/* Importa as fontes do Google Fonts */
+@import url('paletas.css');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Kalam:wght@400;700&display=swap' );
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
+    font-family: "Kalam", cursive;
+    background-color: var(--cor-base);
+    color: var(--cor-texto);
+    min-height: 100vh;
+    
+    /* Fundo de caderno pautado */
+    background-image:
+        linear-gradient(var(--cor-linha-fundo) 1px, transparent 1px);
+    background-size: 100% 2.5rem; /* Altura da linha um pouco maior */
+    line-height: 2.5rem;
+
+    /* Centraliza o conteúdo principal */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
-/* Navegação */
+/* ------------------------------------
+    Navegação estilo "Abas de Caderno"
+---------------------------------------*/
 nav {
-    background-color: #f4f4f4;
-    padding: 1rem;
-    border-bottom: 2px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1.7rem;
+    gap: 5px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: -2px; /* Puxa as abas para cima da borda do main */
 }
 
 .nav-btn {
-    background-color: #fff;
-    border: 2px solid #ddd;
-    padding: 0.5rem 1rem;
-    margin-right: 0.5rem;
+    font-family: "Fredoka", sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 10px 25px;
+    border: 2px solid var(--cor-borda);
+    background-color: var(--cor-aba-inativa);
+    color: var(--cor-texto);
     cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.nav-btn:hover {
-    background-color: #e9e9e9;
+    border-radius: 10px 10px 0 0; /* Cantos arredondados apenas no topo */
+    box-shadow: 3px 0px 0 var(--cor-borda);
+    transition: all 0.2s ease;
+    position: relative;
+    top: 0;
+    z-index: 2;
 }
 
 .nav-btn.ativo {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
+    background-color: white; /* Cor da "página" aberta */
+    border-bottom: 2px solid white; /* Esconde a borda inferior para conectar com o conteúdo */
+    top: 2px; /* Desce um pouco para dar efeito de profundidade */
+    box-shadow: none;
+    z-index: 10;
 }
 
-/* Seções principais */
+.nav-btn:not(.ativo):hover {
+    background-color: #f0f0f0;
+    top: 7px;
+    z-index: 2;
+}
+
+/* ------------------------------------
+    Conteúdo Principal estilo "Página de Caderno"
+---------------------------------------*/
 main {
-    padding: 2rem;
+    background-color: white;
+    border: 2px solid var(--cor-borda);
+    border-radius: 0 15px 15px 15px; /* Arredonda os cantos, exceto o superior esquerdo */
+    padding: 40px 50px;
+    width: 100%;
     max-width: 800px;
-    margin: 0 auto;
+    min-height: 400px;
+    box-shadow: 8px 8px 0 var(--cor-borda);
+    position: relative;
+    z-index: 5;
 }
 
+/* Esconde as seções inativas */
 main > div {
     display: none;
-    animation: fadeIn 0.3s ease-in;
 }
 
+/* Mostra a seção ativa */
 main > div.ativo {
     display: block;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Estilos específicos das seções */
-.sobre h1,
-.cadastro-login h2,
-.contato h2 {
-    margin-bottom: 1rem;
-    color: #007bff;
+h1, h2 {
+    font-family: "Kalam", cursive;
+    font-size: 3rem;
+    color: var(--cor-acento);
+    margin-bottom: 2rem;
+    text-shadow: 3px 3px 0px var(--cor-borda);
 }
 
-.sobre p,
-.cadastro-login p,
-.contato p {
-    margin-bottom: 1rem;
+p {
+    font-family: "Fredoka", sans-serif;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    margin-bottom: 1.5rem;
 }
 
-.sobre button,
-.cadastro-login button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    margin-right: 0.5rem;
-    margin-top: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* ------------------------------------
+    Links e Botões
+---------------------------------------*/
+a {
+    color: var(--cor-link);
+    text-decoration: none;
+    font-weight: 700;
+    position: relative;
 }
 
-.sobre button:hover,
-.cadastro-login button:hover {
-    background-color: #0056b3;
+a:hover {
+    text-decoration: underline;
 }
 
-/* Estilos gerais de botões */
 .btn {
     display: inline-block;
-    padding: 0.7rem 1.5rem;
-    background-color: var(--cor-acento, #007bff);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
+    background-color: var(--cor-acento);
+    color: white;
+    font-family: "Fredoka", sans-serif;
+    font-size: 1.1rem;
     font-weight: 700;
-    text-align: center;
+    padding: 12px 25px;
+    border: 2px solid var(--cor-borda);
+    border-radius: 8px;
+    box-shadow: 3px 3px 0 var(--cor-borda);
     text-decoration: none;
-    margin: 0.5rem 0.5rem 0 0;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    margin-top: 1rem;
+    margin-right: 10px;
+    transition: all 0.2s ease-in-out;
 }
 
 .btn:hover {
-    background-color: var(--cor-alerta, #0056b3);
+    background-color: var(--cor-acento-hover);
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0 var(--cor-borda);
+    text-decoration: none;
 }
 
-/* Responsividade */
+.btn:active {
+    transform: translateY(1px);
+    box-shadow: 2px 2px 0 var(--cor-borda);
+}
+
+/* ------------------------------------
+    Responsividade para Celular
+---------------------------------------*/
 @media (max-width: 768px) {
+    body {
+        line-height: 2.2rem;
+        background-size: 100% 2.2rem;
+    }
+
     nav {
-        text-align: center;
+        flex-wrap: wrap; /* Permite que os botões quebrem a linha se não couberem */
     }
-    
+
     .nav-btn {
-        display: block;
-        width: 100%;
-        margin: 0.25rem 0;
+        padding: 12px 15px;
+        font-size: 0.9rem;
     }
-    
+
     main {
-        padding: 1rem;
+        padding: 30px 25px;
+        min-height: auto;
+    }
+
+    h1, h2 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    p {
+        font-size: 1rem;
+        line-height: 1.8rem;
     }
 }

@@ -17,7 +17,7 @@ header {
     background-color: var(--cor-base-secundaria);
     border-bottom: 2px solid var(--cor-borda);
     z-index: 4;
-    box-shadow: 0 2px 4px rgba(13, 0, 84, 0.268);
+    box-shadow: 0px 4px 0px var(--cor-borda);
 }
 
 header form.barra-pesquisar {
@@ -129,7 +129,7 @@ div#perfil > div#dados-perfil {
     border: 2px solid var(--cor-borda);
     border-radius: 10px;
     padding: 8px;
-    box-shadow: 0 2px 4px var(--cor-sombra);
+    box-shadow: 8px 8px 0px var(--cor-borda);
     display: none;
 }
 
@@ -138,8 +138,8 @@ div#perfil > div#dados-perfil.ativo {
 }
 
 div#dados-perfil img {
-    height: 80px;
-    width: 80px;
+    height: 90px;
+    width: 90px;
 }
 
 div#dados-perfil > div {
@@ -176,6 +176,7 @@ div#dados-perfil > div > button#btn-sair:hover {
         padding: 0.5rem 1rem;
         height: auto;
         gap: 0.5rem;
+        box-shadow: 0px 2px 0 var(--cor-borda);
     }
 
     header form.barra-pesquisar {

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { criarPostagem, mostrarFeed } = require('../controllers/postController');
+const { criarPostagem, mostrarFeed, criarPostsTeste, deletarPostsTeste } = require('../controllers/postController');
 const upload = require('../controllers/multerController');
 
 // middleware para verificar autenticação/login
@@ -23,6 +23,8 @@ const requerAutenticacao = (req, res, next) => {
 // rotas protegidas
 router.get('/feed', requerAutenticacao, mostrarFeed);
 router.post('/criar-post', requerAutenticacao, upload.single('imagem'), criarPostagem);
+router.get('/criar-posts-teste', criarPostsTeste);
+router.get('/deletar-posts-teste', deletarPostsTeste);
 
 // router.get('/feed',  mostrarFeed);
 // router.post('/criar-post', upload.single('imagem'), criarPostagem);

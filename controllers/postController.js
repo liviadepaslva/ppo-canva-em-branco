@@ -1,5 +1,7 @@
 const { PrismaClient } = require('../prisma/generated/prisma');
 const prisma = new PrismaClient();
+const path = require('path');
+const fs = require('fs');
 
 const criarPostagem = async (req, res) => {
     const { titulo, conteudo, categoria } = req.body;
@@ -56,7 +58,6 @@ const mostrarFeed = async (req, res) => {
         // testa conexão com o banco de dados primeiro
         await prisma.$connect();
         console.log('Banco de dados conectado com sucesso! ;)');
-
         // vê quantos post tem
         const numPosts = await prisma.post.count();
         console.log('Total posts in database:', numPosts);
@@ -100,4 +101,59 @@ const mostrarFeed = async (req, res) => {
     }
 };
 
-module.exports = { criarPostagem, mostrarFeed };
+const criarPostsTeste = async (req, res) => {
+    try {
+        // Get all image files from public/testes-posts-imgs
+        const imgsDir = path.join(__dirname, '../public/teste-posts-imgs');
+        const files = fs.readdirSync(imgsDir).filter(f =>
+            /\.(jpg|jpeg|png|gif|webp)$/i.test(f)
+        );
+
+        let count = 0;
+        for (const file of files) {
+            // Create a post for each image
+            const post = await prisma.post.create({
+                data: {
+                    titulo: `Post de Teste ${count + 1}`,
+                    conteudo: `Conteúdo de teste para imagem ${file}`,
+                    categoria: 'teste',
+                    autorId: req.session.usuarioId || 1 // Use a valid user ID
+                }
+            });
+
+            await prisma.imagem.create({
+                data: {
+                    url: `/teste-posts-imgs/${file}`,
+                    descricao: `Imagem de teste ${file}`,
+                    ordem: 1,
+                    postId: post.id
+                }
+            });
+
+            count++;
+        }
+
+        res.redirect('/feed?success=teste_posts_criados');
+    } catch (err) {
+        console.error('Erro ao criar posts de teste:', err);
+        res.redirect('/feed?error=teste_posts_falhou');
+    }
+};
+
+const deletarPostsTeste = async (req, res) => {
+    try {
+        // Deleta todos os posts de teste
+        await prisma.post.deleteMany({
+            where: {
+                categoria: 'teste'
+            }
+        });
+
+        res.redirect('/feed?success=teste_posts_deletados');
+    } catch (err) {
+        console.error('Erro ao deletar posts de teste:', err);
+        res.redirect('/feed?error=teste_posts_falhou');
+    }
+};
+
+module.exports = { criarPostagem, mostrarFeed, criarPostsTeste, deletarPostsTeste };

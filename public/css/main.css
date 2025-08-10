@@ -32,11 +32,17 @@ body::before {
     content: '';
     position: fixed;
     top: 0;
-    left: 14vh;
+    left: 18vh;
     width: 3px;
     height: 100%;
     background-color: var(--cor-primaria, #6666ff);
     z-index: 0;
+}
+
+@media screen and (max-width: 768px) {
+    body::before {
+        left: 8dvh;
+    }
 }
 
 main {

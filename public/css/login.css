@@ -1,109 +1,169 @@
 @import url('paletas.css');
 
+/* Importa a fonte do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Kalam:wght@400;700&display=swap' );
+
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Fredoka", sans-serif;
 }
 
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-} 
+}
 
 body {
-    font-family: "Comic Sans MS", "Comic Neue", cursive;
+    font-family: "Kalam", cursive; /* Fonte que imita escrita à mão */
     background-color: var(--cor-base);
     color: var(--cor-texto);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 20px;
     min-height: 100vh;
+
+    /* Efeito de fundo de caderno com linhas */
+    background-image:
+        linear-gradient(var(--cor-linha-fundo) 1px, transparent 1px);
+    background-size: 100% 2.2rem; /* Altura da linha igual à altura da linha do texto */
+    line-height: 2.2rem;
+}
+
+/* ------------------------------------
+    Formulário Estilo Caderno
+---------------------------------------*/
+form {
+    font-family: "Fredoka", sans-serif; /* Fonte mais legível para o formulário */
+    background-color: var(--cor-base-secundaria);
+    border: 2px solid var(--cor-borda);
+    border-radius: 15px 3px 15px 3px; /* Bordas irregulares */
+    padding: 25px 30px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 5px 5px 0 var(--cor-borda);
+    margin: 40px auto;
+    position: relative; /* Necessário para o "clipe de papel" */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito de "clipe de papel" no topo do formulário */
+form::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 30px;
+    width: 60px;
+    height: 30px;
+    background-color: #ffc857;
+    border: 2px solid var(--cor-borda);
+    border-radius: 5px;
+    transform: rotate(-15deg);
+    box-shadow: 2px 2px 0 var(--cor-borda);
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.8rem;
     color: var(--cor-acento);
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 4px 4px 0px var(--cor-borda);
 }
-
-/* ------------------------------------
-    Formulário
----------------------------------------*/
-form {
-    background-color: var(--cor-base-secundaria);
-    border: 2px solid var(--cor-borda);
-    border-radius: 12px;
-    padding: 20px;
-    max-width: 350px;
-    width: 90%;
-    box-shadow: 4px 4px 0 var(--cor-borda);
-    margin-top: 20px;
-}
-
 
 label {
     display: block;
-    font-weight: bold;
-    margin-bottom: 6px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
 }
 
-input {
+input[type="email"],
+input[type="password"] {
     width: 100%;
-    padding: 8px;
-    border: 2px solid var(--cor-borda);
-    border-radius: 6px;
-    font-size: 1rem;
+    padding: 12px;
+    border: none;
+    border-bottom: 3px dashed var(--cor-acento); /* Borda inferior tracejada */
+    background-color: transparent;
+    font-family: "Kalam", cursive;
+    font-size: 1.2rem;
+    color: var(--cor-texto);
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
 }
 
-button {
+input:focus {
+    outline: none;
+    border-bottom: 3px solid var(--cor-acento-hover);
+}
+
+button[type="submit"] {
     background-color: var(--cor-acento);
     color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 1rem;
+    border: 2px solid var(--cor-borda);
+    padding: 12px 15px;
+    font-size: 1.2rem;
     border-radius: 8px;
     cursor: pointer;
     width: 100%;
-    font-weight: bold;
-    transition: background-color 0.2s;
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
+    box-shadow: 3px 3px 0 var(--cor-borda);
+    transition: all 0.2s ease-in-out;
+    margin-top: 10px;
 }
 
-button:hover {
+button[type="submit"]:hover {
     background-color: var(--cor-acento-hover);
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0 var(--cor-borda);
+}
+
+button[type="submit"]:active {
+    transform: translateY(1px);
+    box-shadow: 2px 2px 0 var(--cor-borda);
 }
 
 /* ------------------------------------
-    Links
+    Links e Alertas
 ---------------------------------------*/
-p a {
+form p {
+    text-align: center;
+    margin-top: 20px;
+    line-height: 1.5;
+}
+
+form p a {
     color: var(--cor-link);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
+    padding: 3px 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-p a:hover {
-    text-decoration: underline;
+form p a:hover {
+    background-color: var(--cor-link);
+    color: white;
+    text-decoration: none;
 }
 
-/* ------------------------------------
-    Alertas
----------------------------------------*/
 .alert {
-    padding: 12px;
-    border-radius: 6px;
-    font-weight: bold;
-    box-shadow: 2px 2px 0 var(--cor-borda);
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
+    border: 2px solid var(--cor-borda);
+    box-shadow: 3px 3px 0 var(--cor-borda);
+    max-width: 400px;
+    width: 90%;
+    margin: 20px auto 0;
+    text-align: center;
+    color: var(--cor-borda);
 }
 
 .alert-error {
     background-color: var(--cor-alerta);
-    color: white;
 }
 
 .alert-success {
     background-color: var(--cor-sucesso);
-    color: white;
 }
