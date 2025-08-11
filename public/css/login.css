@@ -1,8 +1,8 @@
 @import url('paletas.css');
-
-/* Importa a fonte do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Kalam:wght@400;700&display=swap' );
 
+@import url('paletas.css');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Kalam:wght@400;700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -11,42 +11,41 @@
 }
 
 html {
-    scroll-behavior: smooth;
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: "Kalam", cursive; /* Fonte que imita escrita à mão */
+    font-family: "Kalam", cursive;
     background-color: var(--cor-base);
     color: var(--cor-texto);
     padding: 20px;
     min-height: 100vh;
-
-    /* Efeito de fundo de caderno com linhas */
-    background-image:
-        linear-gradient(var(--cor-linha-fundo) 1px, transparent 1px);
-    background-size: 100% 2.2rem; /* Altura da linha igual à altura da linha do texto */
+    background-image: linear-gradient(var(--cor-linha-fundo) 1px, transparent 1px);
+    background-size: 100% 2.2rem;
     line-height: 2.2rem;
 }
 
-/* ------------------------------------
-    Formulário Estilo Caderno
----------------------------------------*/
+/* -------------------------------
+   Formulário
+----------------------------------*/
+
 form {
-    font-family: "Fredoka", sans-serif; /* Fonte mais legível para o formulário */
+    font-family: "Fredoka", sans-serif;
     background-color: var(--cor-base-secundaria);
     border: 2px solid var(--cor-borda);
-    border-radius: 15px 3px 15px 3px; /* Bordas irregulares */
+    border-radius: 15px 3px 15px 3px;
     padding: 25px 30px;
     max-width: 400px;
     width: 90%;
-    box-shadow: 5px 5px 0 var(--cor-borda);
     margin: 40px auto;
-    position: relative; /* Necessário para o "clipe de papel" */
+    position: relative;
+    box-shadow: 5px 5px 0 var(--cor-borda);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Efeito de "clipe de papel" no topo do formulário */
+/* Post it */
+
 form::before {
     content: '';
     position: absolute;
@@ -61,27 +60,35 @@ form::before {
     box-shadow: 2px 2px 0 var(--cor-borda);
 }
 
+/* -------------------------------
+   Tipografias
+----------------------------------*/
+
 h1 {
     font-size: 2.8rem;
     color: var(--cor-acento);
     text-align: center;
     margin-bottom: 25px;
-    text-shadow: 4px 4px 0px var(--cor-borda);
+    text-shadow: 4px 4px 0 var(--cor-borda);
 }
 
 label {
     display: block;
     font-weight: 700;
-    margin-bottom: 8px;
     font-size: 1.1rem;
+    margin-bottom: 8px;
 }
+
+/* -------------------------------
+   Inputs e botão do forms
+----------------------------------*/
 
 input[type="email"],
 input[type="password"] {
     width: 100%;
     padding: 12px;
     border: none;
-    border-bottom: 3px dashed var(--cor-acento); /* Borda inferior tracejada */
+    border-bottom: 3px dashed var(--cor-acento);
     background-color: transparent;
     font-family: "Kalam", cursive;
     font-size: 1.2rem;
@@ -96,16 +103,16 @@ input:focus {
 }
 
 button[type="submit"] {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
     background-color: var(--cor-acento);
     color: white;
     border: 2px solid var(--cor-borda);
-    padding: 12px 15px;
-    font-size: 1.2rem;
     border-radius: 8px;
     cursor: pointer;
-    width: 100%;
-    font-weight: 700;
-    font-family: "Fredoka", sans-serif;
     box-shadow: 3px 3px 0 var(--cor-borda);
     transition: all 0.2s ease-in-out;
     margin-top: 10px;
@@ -122,9 +129,10 @@ button[type="submit"]:active {
     box-shadow: 2px 2px 0 var(--cor-borda);
 }
 
-/* ------------------------------------
-    Links e Alertas
----------------------------------------*/
+/* -------------------------------
+   Links no formulário
+----------------------------------*/
+
 form p {
     text-align: center;
     margin-top: 20px;
@@ -133,37 +141,40 @@ form p {
 
 form p a {
     color: var(--cor-link);
-    text-decoration: none;
     font-weight: 700;
     padding: 3px 5px;
     border-radius: 4px;
+    text-decoration: none;
     transition: background-color 0.2s, color 0.2s;
 }
 
 form p a:hover {
     background-color: var(--cor-link);
     color: white;
-    text-decoration: none;
 }
 
+/* -------------------------------
+   Alertas
+----------------------------------*/
+
 .alert {
-    padding: 15px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-family: "Fredoka", sans-serif;
-    border: 2px solid var(--cor-borda);
-    box-shadow: 3px 3px 0 var(--cor-borda);
     max-width: 400px;
     width: 90%;
     margin: 20px auto 0;
+    padding: 15px;
     text-align: center;
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
     color: var(--cor-borda);
+    border: 2px solid var(--cor-borda);
+    border-radius: 8px;
+    box-shadow: 3px 3px 0 var(--cor-borda);
 }
 
-.alert-error {
-    background-color: var(--cor-alerta);
+.alert-error { 
+    background-color: var(--cor-alerta); 
 }
 
-.alert-success {
-    background-color: var(--cor-sucesso);
+.alert-success { 
+    background-color: var(--cor-sucesso); 
 }

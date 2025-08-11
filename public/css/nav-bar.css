@@ -1,18 +1,20 @@
 @import url('paletas.css');
 
+/* -----------------------------
+    NAV BAR
+----------------------------- */
+
 nav {
     position: fixed;
     top: 0;
     left: 0;
-    width: 90px; /* Largura fixa da barra lateral */
-    height: 100dvh; /* Ocupa toda a altura da tela */
-    
+    width: 90px;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centraliza os itens verticalmente */
-    gap: 1.5rem; /* Espaçamento entre os itens */
-    
+    justify-content: center;
+    gap: 1.5rem;
     padding: 1rem 0;
     background-color: var(--cor-base-secundaria, #fff6db);
     border-right: 3px solid var(--cor-borda);
@@ -40,22 +42,19 @@ nav .item i {
     line-height: 1;
 }
 
-/* Efeito de hover/ativo */
 nav .item:hover,
 nav .item.ativo {
     background-color: var(--cor-acento);
     color: white;
-    transform: scale(1.1) rotate(-7deg); /* Efeito de rotação divertido */
+    transform: scale(1.1);
     box-shadow: 4px 4px 0 var(--cor-borda);
 }
 
-/* Botão de Criar Postagem (Destaque) */
 #btn-criar-postagem {
     background-color: var(--cor-acento);
     color: white;
     border-radius: 16px;
-    /* Adiciona uma margem para separá-lo visualmente */
-    margin: 1rem 0; 
+    margin: 1rem 0;
 }
 
 #btn-criar-postagem:hover {
@@ -64,11 +63,9 @@ nav .item.ativo {
     box-shadow: 5px 5px 0 var(--cor-borda);
 }
 
-/* ------------------------------------
-    Formulário Modal e Alertas (sem alterações, já estão perfeitos)
----------------------------------------*/
-/* ... (Cole aqui as seções #form-overlay, form#form-criar-postagem e .alert do CSS anterior) ... */
-/* As regras abaixo são as mesmas da versão anterior, pois já funcionam perfeitamente */
+/* -----------------------------
+    MODAL FORM & ALERTS
+----------------------------- */
 
 #form-overlay {
     position: fixed;
@@ -195,7 +192,9 @@ form#form-criar-postagem small {
     opacity: 0.8;
 }
 
-/* ===== Botões ===== */
+/* -----------------------------
+    FORM BUTTONS
+----------------------------- */
 .form-buttons {
     display: flex;
     justify-content: flex-end;
@@ -259,7 +258,10 @@ form#form-criar-postagem small {
     transform: scale(1.2) rotate(90deg);
 }
 
-/* ===== Alertas ===== */
+/* -----------------------------
+    ALERTAS
+----------------------------- */
+
 .alert {
     padding: 1rem 1.5rem;
     margin-bottom: 1rem;
@@ -274,13 +276,14 @@ form#form-criar-postagem small {
 .alert-error {
     background-color: var(--cor-alerta, #ff8a80);
 }
-/* ------------------------------------
-    Ajustes para Telas Menores
----------------------------------------*/
+
+/* -----------------------------
+    Responsividade
+----------------------------- */
 @media (max-width: 480px) {
     body {
         padding-left: 0;
-        padding-bottom: 75px; /* Space for bottom nav */
+        padding-bottom: 75px;
     }
 
     nav {

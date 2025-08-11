@@ -1,52 +1,69 @@
 @import url('paletas.css');
 
+/* ------------------------------------
+    Alertas
+---------------------------------------*/
+
 div.alert {
     width: 80%;
 }
 
+.alert {
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ------------------------------------
+    Seção do feed yay
+---------------------------------------*/
+
 section.feed-container {
     width: 100%;
     padding: 1rem;
-    /* Layout de colunas para o efeito de mural (Pinterest-like) */
-    columns: 5 220px; /* Cria até 5 colunas, cada uma com no mínimo 220px */
+    columns: 5 220px;
     column-gap: 1.5rem;
 }
 
 .feed-container article.post-card {
     width: 100%;
-    background-color: white; /* Fundo branco para parecer um recorte */
+    background-color: white;
     padding: 1rem;
     border: 2px solid var(--cor-borda);
-    border-radius: 12px 4px 12px 4px; /* Borda irregular charmosa */
-    margin-bottom: 1.5rem; /* Espaço entre os cards na mesma coluna */
-    break-inside: avoid; /* Evita que um card seja quebrado entre colunas */
+    border-radius: 12px 4px 12px 4px;
+    margin-bottom: 1.5rem;
+    break-inside: avoid;
     box-shadow: 5px 5px 0px var(--cor-borda);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform: rotate(0deg); /* Estado inicial para a animação */
+    transition: box-shadow 0.3s ease;
 }
 
-/* Efeito de "colado na página" ao passar o mouse */
 .feed-container article.post-card:hover {
     box-shadow: 8px 8px 5px rgba(0,0,0,0.2);
-    transform: translateY(-5px) rotate(var(--rotation)); /* Usa a variável de rotação */
 }
 
-/* Adiciona uma leve e aleatória rotação a cada card para um look mais orgânico */
-.feed-container article.post-card:nth-child(5n+1) { --rotation: 1.5deg; }
-.feed-container article.post-card:nth-child(5n+2) { --rotation: -1deg; }
-.feed-container article.post-card:nth-child(5n+3) { --rotation: 1deg; }
-.feed-container article.post-card:nth-child(5n+4) { --rotation: -1.5deg; }
-.feed-container article.post-card:nth-child(5n+5) { --rotation: 0.5deg; }
-
-
+/* imagem do post*/
 .feed-container article.post-card img {
     width: 100%;
     height: auto;
     border: 2px solid var(--cor-borda);
     border-radius: 8px;
-    background-color: #eee; /* Cor de fundo enquanto a imagem carrega */
+    background-color: #eee;
 }
 
+/* titulo do post */
 .feed-container article.post-card h3 {
     font-family: "Kalam", cursive;
     margin: 0.8rem 0 0.5rem;
@@ -55,6 +72,7 @@ section.feed-container {
     line-height: 1.2;
 }
 
+/* curtir e comentar */
 article.post-card .post-actions {
     display: flex;
     justify-content: flex-end;
@@ -75,7 +93,7 @@ article.post-card .post-actions {
     border: 2px solid transparent;
     color: var(--cor-texto);
     cursor: pointer;
-    border-radius: 50%; /* Botões redondos ficam ótimos */
+    border-radius: 50%;
     transition: all 0.2s ease-in-out;
 }
 
@@ -90,15 +108,15 @@ article.post-card .post-actions {
 }
 
 /* ------------------------------------
-    Bloco de "Nenhuma postagem"
+    Caso não tenha posts ainda
 ---------------------------------------*/
+
 .no-posts {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centraliza o conteúdo */
+    justify-content: center;
     gap: 2rem;
-    text-align: center; /* Centraliza o texto */
-
+    text-align: center;
     background: var(--cor-base-secundaria, #fff6db);
     border: 3px dashed var(--cor-borda);
     border-radius: 16px;
@@ -109,7 +127,7 @@ article.post-card .post-actions {
 }
 
 .no-posts > i {
-    font-size: 4rem; /* Ícone maior e mais impactante */
+    font-size: 4rem;
     color: var(--cor-acento);
     flex-shrink: 0;
     text-shadow: 3px 3px 0 var(--cor-borda);
@@ -118,7 +136,7 @@ article.post-card .post-actions {
 .no-posts-content {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Alinha o conteúdo no centro */
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -133,7 +151,7 @@ article.post-card .post-actions {
     font-family: "Fredoka", sans-serif;
     margin: 0 0 1rem;
     font-size: 1.1rem;
-    max-width: 35ch; /* Limita a largura do texto para melhor legibilidade */
+    max-width: 35ch;
 }
 
 .no-posts-content .btn-primary {
@@ -166,17 +184,17 @@ article.post-card .post-actions {
 }
 
 /* ------------------------------------
-    Responsividade
+    Responsividade (em progresso)
 ---------------------------------------*/
+
 @media (max-width: 768px) {
     section.feed-container {
-        /* Em telas menores, reduzimos o número de colunas */
         columns: 2 150px;
         column-gap: 1rem;
     }
 
     .no-posts {
-        flex-direction: column; /* Empilha o ícone e o texto */
+        flex-direction: column;
         gap: 1rem;
         padding: 1.5rem;
     }

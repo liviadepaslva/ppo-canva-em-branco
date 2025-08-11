@@ -1,7 +1,6 @@
-<!-- Show success/error messages -->
 <% if (typeof success !== 'undefined' && success) { %>
     <div class="alert alert-success" id="alert-message">
-        <% if (success === 'post_criado') { %>
+        <% if (success === 'post_criado' || success === 'teste_posts_criados') { %>
             ✓ Postagem criada com sucesso!
         <% } %>
     </div>
@@ -25,7 +24,8 @@
                 
                 else { %>
                     <img src="/imgs/image-placeholder.jpg" alt="postagem sem imagem" class="post-image">
-                <% } %>
+                <% } // caso não tenha imagem %>
+
                 <h3 class="post-title"><%= post.titulo %></h3>
                 <div class="post-actions">
                     <button class="post-action-btn">
@@ -38,40 +38,19 @@
             </article>
         <% }); %>
     <% } %>
+
 </section>
 
-<% if (!(posts && posts.length > 0)) { %>
+<% if (!(posts && posts.length > 0)) { // caso não tenha postagens, crie vc a primeira %>
     <div class="no-posts">
         <i class="fi fi-br-add-image"></i>
         <div class="no-posts-content">
-        <h3>Nenhuma postagem encontrada</h3>
-        <p>Seja o primeiro a compartilhar sua arte!</p>
-        <button class="btn btn-primary" onclick="document.getElementById('btn-criar-postagem')?.click()">
-            <i class="fi fi-br-multiple"></i>
-            Criar Primeira Postagem
-        </button>
+            <h3>Nenhuma postagem encontrada</h3>
+            <p>Seja o primeiro a compartilhar sua arte!</p>
+            <button class="btn btn-primary" onclick="document.getElementById('btn-criar-postagem')?.click()">
+                <i class="fi fi-br-multiple"></i>
+                Criar Primeira Postagem
+            </button>
+        </div>
     </div>
-</div>
-
-    <% } %>
-
-<style>
-.alert {
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    border-radius: 6px;
-    font-weight: 500;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.alert-error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-</style>
+<% } %>

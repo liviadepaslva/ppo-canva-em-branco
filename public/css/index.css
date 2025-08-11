@@ -1,4 +1,3 @@
-/* Importa as fontes do Google Fonts */
 @import url('paletas.css');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Kalam:wght@400;700&display=swap' );
 
@@ -17,31 +16,26 @@ body {
     background-color: var(--cor-base);
     color: var(--cor-texto);
     min-height: 100vh;
-    
-    /* Fundo de caderno pautado */
-    background-image:
-        linear-gradient(var(--cor-linha-fundo) 1px, transparent 1px);
-    background-size: 100% 2.5rem; /* Altura da linha um pouco maior */
+    /* fundo de caderno pautado */
+    background-image: linear-gradient(var(--cor-linha-fundo) 1px, transparent 1px);
+    background-size: 100% 2.5rem;
     line-height: 2.5rem;
-
-    /* Centraliza o conteúdo principal */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 70px;
 }
 
-/* ------------------------------------
-    Navegação estilo "Abas de Caderno"
----------------------------------------*/
+/* -------------------------------
+         seções e abas
+----------------------------------*/
 nav {
     display: flex;
     justify-content: flex-end;
-    padding-right: 1.7rem;
     gap: 5px;
+    padding-right: 1.7rem;
     width: 100%;
     max-width: 800px;
-    margin-bottom: -2px; /* Puxa as abas para cima da borda do main */
 }
 
 .nav-btn {
@@ -52,19 +46,19 @@ nav {
     border: 2px solid var(--cor-borda);
     background-color: var(--cor-aba-inativa);
     color: var(--cor-texto);
+    border-radius: 10px 10px 0 0;
+    box-shadow: 3px 0 0 var(--cor-borda);
     cursor: pointer;
-    border-radius: 10px 10px 0 0; /* Cantos arredondados apenas no topo */
-    box-shadow: 3px 0px 0 var(--cor-borda);
-    transition: all 0.2s ease;
     position: relative;
     top: 0;
     z-index: 2;
+    transition: all 0.2s ease;
 }
 
 .nav-btn.ativo {
-    background-color: white; /* Cor da "página" aberta */
-    border-bottom: 2px solid white; /* Esconde a borda inferior para conectar com o conteúdo */
-    top: 2px; /* Desce um pouco para dar efeito de profundidade */
+    background-color: white;
+    border-bottom: 2px solid white;
+    top: 2px;
     box-shadow: none;
     z-index: 10;
 }
@@ -72,16 +66,12 @@ nav {
 .nav-btn:not(.ativo):hover {
     background-color: #f0f0f0;
     top: 7px;
-    z-index: 2;
 }
 
-/* ------------------------------------
-    Conteúdo Principal estilo "Página de Caderno"
----------------------------------------*/
 main {
     background-color: white;
     border: 2px solid var(--cor-borda);
-    border-radius: 0 15px 15px 15px; /* Arredonda os cantos, exceto o superior esquerdo */
+    border-radius: 0 15px 15px 15px;
     padding: 40px 50px;
     width: 100%;
     max-width: 800px;
@@ -91,28 +81,40 @@ main {
     z-index: 5;
 }
 
-/* Esconde as seções inativas */
-main > div {
-    display: none;
+main > div { 
+    display: none; 
 }
 
-/* Mostra a seção ativa */
 main > div.ativo {
     display: block;
     animation: fadeIn 0.5s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; transform: translateY(10px); 
+    }
+    
+    to   { 
+        opacity: 1; transform: translateY(0); 
+    }
 }
 
+/* imagem da aba de contato */
+main > div.contato > img {
+    width: 400px;
+    margin: 0 40px;
+}
+
+/* -------------------------------
+   Tipografia
+----------------------------------*/
 h1, h2 {
     font-family: "Kalam", cursive;
     font-size: 3rem;
     color: var(--cor-acento);
     margin-bottom: 2rem;
-    text-shadow: 3px 3px 0px var(--cor-borda);
+    text-shadow: 3px 3px 0 var(--cor-borda);
 }
 
 p {
@@ -122,18 +124,14 @@ p {
     margin-bottom: 1.5rem;
 }
 
-/* ------------------------------------
+/* -------------------------------
     Links e Botões
----------------------------------------*/
+----------------------------------*/
 a {
     color: var(--cor-link);
-    text-decoration: none;
     font-weight: 700;
     position: relative;
-}
-
-a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .btn {
@@ -147,9 +145,9 @@ a:hover {
     border: 2px solid var(--cor-borda);
     border-radius: 8px;
     box-shadow: 3px 3px 0 var(--cor-borda);
-    text-decoration: none;
     margin-top: 1rem;
     margin-right: 10px;
+    text-decoration: none;
     transition: all 0.2s ease-in-out;
 }
 
@@ -157,44 +155,9 @@ a:hover {
     background-color: var(--cor-acento-hover);
     transform: translateY(-2px);
     box-shadow: 5px 5px 0 var(--cor-borda);
-    text-decoration: none;
 }
 
 .btn:active {
     transform: translateY(1px);
     box-shadow: 2px 2px 0 var(--cor-borda);
-}
-
-/* ------------------------------------
-    Responsividade para Celular
----------------------------------------*/
-@media (max-width: 768px) {
-    body {
-        line-height: 2.2rem;
-        background-size: 100% 2.2rem;
-    }
-
-    nav {
-        flex-wrap: wrap; /* Permite que os botões quebrem a linha se não couberem */
-    }
-
-    .nav-btn {
-        padding: 12px 15px;
-        font-size: 0.9rem;
-    }
-
-    main {
-        padding: 30px 25px;
-        min-height: auto;
-    }
-
-    h1, h2 {
-        font-size: 2.2rem;
-        line-height: 1.2;
-    }
-
-    p {
-        font-size: 1rem;
-        line-height: 1.8rem;
-    }
 }

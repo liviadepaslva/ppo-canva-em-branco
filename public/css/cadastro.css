@@ -1,7 +1,8 @@
 @import url('paletas.css');
-
-/* Importa a fonte do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Kalam:wght@400;700&display=swap' );
+
+@import url('paletas.css');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Kalam:wght@400;700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -10,46 +11,42 @@
 }
 
 html {
-    scroll-behavior: smooth;
     font-size: 16px;
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: "Kalam", cursive;
     background-color: var(--cor-base);
     color: var(--cor-texto);
-    padding: 20px; /* Espaçamento para telas pequenas */
+    padding: 20px;
     min-height: 100vh;
-
-    /* Fundo de caderno pautado */
-    background-image:
-        linear-gradient(var(--cor-linha-fundo) 1px, transparent 1px);
+    background-image: linear-gradient(var(--cor-linha-fundo) 1px, transparent 1px);
     background-size: 100% 2.2rem;
     line-height: 2.2rem;
 }
 
-/* ------------------------------------
-    Formulário Estilo Caderno
----------------------------------------*/
+/* -------------------------------
+   Formulário
+----------------------------------*/
+
 form {
     font-family: "Fredoka", sans-serif;
     background-color: var(--cor-base-secundaria);
     border: 2px solid var(--cor-borda);
     border-radius: 15px 3px 15px 3px;
     padding: 25px 30px;
-    width: 90%; /* Largura para telas pequenas */
-    max-width: 450px; /* Largura máxima para telas pequenas */
-    box-shadow: 5px 5px 0 var(--cor-borda);
-    margin: 20px auto; /* Margem para telas pequenas */
+    width: 800px;
+    margin: 20px auto;
     position: relative;
+    box-shadow: 5px 5px 0 var(--cor-borda);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Efeito de "clipe de papel" */
 form::before {
     content: '';
     position: absolute;
-    top: -15px;
+    top: -70px;
     left: 30px;
     width: 60px;
     height: 30px;
@@ -61,22 +58,55 @@ form::before {
     margin-top: 3rem;
 }
 
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-grid > div {
+    width: 100%;
+}
+
+.full-width {
+    display: flex;
+    justify-content: space-between;
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .full-width {
+        grid-column: 1;
+    }
+}
+
+/* -------------------------------
+   Tipografia
+----------------------------------*/
+
 h1, h2 {
     font-size: 2.8rem;
     color: var(--cor-acento);
     text-align: center;
     margin-bottom: 25px;
-    text-shadow: 4px 4px 0px var(--cor-borda);
+    text-shadow: 4px 4px 0 var(--cor-borda);
 }
-
-/* ... (o restante das regras para label, input, button, etc. continua igual) ... */
 
 label {
     display: block;
     font-weight: 700;
-    margin-bottom: 8px;
     font-size: 1.1rem;
+    margin-bottom: 8px;
 }
+
+/* -------------------------------
+   Inputs e botões
+----------------------------------*/
 
 input[type="text"],
 input[type="email"],
@@ -99,19 +129,19 @@ input:focus {
 }
 
 button[type="submit"] {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
     background-color: var(--cor-acento);
     color: white;
     border: 2px solid var(--cor-borda);
-    padding: 12px 15px;
-    font-size: 1.2rem;
     border-radius: 8px;
     cursor: pointer;
-    width: 100%;
-    font-weight: 700;
-    font-family: "Fredoka", sans-serif;
     box-shadow: 3px 3px 0 var(--cor-borda);
-    transition: all 0.2s ease-in-out;
     margin-top: 10px;
+    transition: all 0.2s ease-in-out;
 }
 
 button[type="submit"]:hover {
@@ -125,6 +155,10 @@ button[type="submit"]:active {
     box-shadow: 2px 2px 0 var(--cor-borda);
 }
 
+/* -------------------------------
+   Links do Formulário
+----------------------------------*/
+
 form p {
     text-align: center;
     margin-top: 20px;
@@ -133,82 +167,40 @@ form p {
 
 form p a {
     color: var(--cor-link);
-    text-decoration: none;
     font-weight: 700;
     padding: 3px 5px;
     border-radius: 4px;
+    text-decoration: none;
     transition: background-color 0.2s, color 0.2s;
 }
 
 form p a:hover {
     background-color: var(--cor-link);
     color: white;
-    text-decoration: none;
 }
 
+/* -------------------------------
+   Alertas
+----------------------------------*/
+
 .alert {
-    padding: 15px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-family: "Fredoka", sans-serif;
-    border: 2px solid var(--cor-borda);
-    box-shadow: 3px 3px 0 var(--cor-borda);
     width: 90%;
     max-width: 450px;
     margin: 0 auto 20px auto;
+    padding: 15px;
     text-align: center;
+    font-weight: 700;
+    font-family: "Fredoka", sans-serif;
     color: var(--cor-borda);
+    border: 2px solid var(--cor-borda);
+    border-radius: 8px;
+    box-shadow: 3px 3px 0 var(--cor-borda);
 }
 
-.alert-error {
-    background-color: var(--cor-alerta);
+.alert-error { 
+    background-color: var(--cor-alerta); 
 }
 
-.alert-success {
-    background-color: var(--cor-sucesso);
-}
-
-
-/* ------------------------------------
-    Estilos para Telas Maiores (Desktop)
----------------------------------------*/
-@media (min-width: 768px) {
-    body {
-        /* Centraliza o conteúdo na tela */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
-
-    .alert {
-        /* Posiciona o alerta acima do formulário, mas ainda na área central */
-        margin-bottom: 20px;
-        position: relative; /* Garante que fique no fluxo normal */
-        width: 100%;
-        max-width: 650px; /* Largura do alerta */
-    }
-
-    form {
-        width: 100%;
-        max-width: 650px; /* Aumenta a largura máxima do formulário */
-        margin: 0; /* Remove a margem superior/inferior pois o body já centraliza */
-        padding: 35px 45px; /* Aumenta o espaçamento interno */
-    }
-
-    /* Para o formulário de cadastro, podemos usar 2 colunas */
-    .form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
-        gap: 0 25px; /* Espaçamento entre as colunas */
-    }
-
-    .form-grid .full-width {
-        grid-column: 1 / -1; /* Faz o elemento ocupar as duas colunas */
-    }
-
-    h1, h2 {
-        font-size: 3.2rem;
-    }
+.alert-success { 
+    background-color: var(--cor-sucesso); 
 }

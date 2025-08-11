@@ -103,7 +103,7 @@ const mostrarFeed = async (req, res) => {
 
 const criarPostsTeste = async (req, res) => {
     try {
-        // Get all image files from public/testes-posts-imgs
+        // peag todas as imagens da pasta de imagens de teste
         const imgsDir = path.join(__dirname, '../public/teste-posts-imgs');
         const files = fs.readdirSync(imgsDir).filter(f =>
             /\.(jpg|jpeg|png|gif|webp)$/i.test(f)
@@ -111,7 +111,7 @@ const criarPostsTeste = async (req, res) => {
 
         let count = 0;
         for (const file of files) {
-            // Create a post for each image
+            // cria post para cada imagem
             const post = await prisma.post.create({
                 data: {
                     titulo: `Post de Teste ${count + 1}`,

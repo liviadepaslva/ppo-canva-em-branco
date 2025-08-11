@@ -1,7 +1,7 @@
 @import url('paletas.css');
 
 /* ---------------------------
-   Cabeçalho e barra de pesquisa
+    Cabeçalho e barra de pesquisa
 --------------------------- */
 
 header {
@@ -49,7 +49,6 @@ form.barra-pesquisar button#btn-pesquisar {
     display: flex;
     align-items: center;
     justify-content: center;
-
     height: 100%;
     width: 7dvh;
     padding: 10px 20px;
@@ -62,15 +61,13 @@ form.barra-pesquisar button#btn-pesquisar {
     box-sizing: border-box;
 }
 
-
 form.barra-pesquisar button#btn-pesquisar:hover {
     background-color: var(--cor-acento-hover);
 }
 
 /* ---------------------------
-   Dados do perfil
+    Dados do perfil
 --------------------------- */
-
 
 header div#perfil {
     position: relative;
@@ -165,12 +162,12 @@ div#dados-perfil > div > button#btn-sair {
 
 div#dados-perfil > div > button#btn-sair:hover {
     background-color: var(--cor-alerta);
-
 }
 
 /* ---------------------------
-   Responsividade do header e perfil
+    Responsividade do header e perfil
 --------------------------- */
+
 @media (max-width: 768px) {
     header {
         padding: 0.5rem 1rem;
