@@ -74,8 +74,7 @@ const mostrarFeed = async (req, res) => {
             },
             orderBy: {
                 criadoEm: 'desc'
-            },
-            take: 20 // limita a 20 posts por vez
+            }
         });
         
         console.log('Posts carregados:', feedPosts.length);
@@ -117,7 +116,7 @@ const criarPostsTeste = async (req, res) => {
                     titulo: `Post de Teste ${count + 1}`,
                     conteudo: `Conteúdo de teste para imagem ${file}`,
                     categoria: 'teste',
-                    autorId: req.session.usuarioId || 1 // Use a valid user ID
+                    autorId: req.session.usuarioId 
                 }
             });
 

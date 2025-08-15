@@ -111,21 +111,9 @@ const requerAutenticacao = (req, res, next) => {
     }
 };
 
-// middleware para passar dados do usuário para as views
-const enviarDadosUsuario = (req, res) => {
-    // se tiver autenticado, coloca objeto com info
-    res.locals.usuario = req.session.usuarioAutenticado ? {
-        id: req.session.usuarioId,
-        email: req.session.usuarioEmail,
-        nomeUsuario: req.session.usuarioNome
-    } : null;
-    res.redirect('/login');
-};
-
 module.exports = { 
     loginUsuario, 
     cadastrarUsuario, 
     logoutUsuario, 
-    requerAutenticacao, 
-    enviarDadosUsuario 
+    requerAutenticacao 
 };
